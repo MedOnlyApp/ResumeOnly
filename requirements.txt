@@ -11,7 +11,7 @@ pyresparser
 
 # Database
 pymupdf
-sqlite3-binary  # optional: only if you need SQLite extras; stdlib sqlite3 doesn’t need this
+sqlite3  # optional: only if you need SQLite extras; stdlib sqlite3 doesn’t need this
 
 # External APIs / tools
 groq
@@ -19,3 +19,4 @@ requests  # if you make HTTP requests
 
 # Large English spaCy model
 https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl
+

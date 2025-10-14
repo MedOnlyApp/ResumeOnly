@@ -4,7 +4,6 @@ pymupdf
 re
 nltk
 pyresparser
-spacy
 threading
 groq
 json5
@@ -22,3 +21,6 @@ base64
 time
 json5
 secrets
+
+spacy
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ResumeOnly - Portfolio</title>
+
+        <link rel="icon" type="image/x-icon" href="../static/img/portfolio/portfolio.ico">
+
+        <link rel="stylesheet" href="../static/css/nav_bar.css">
+        <link rel="stylesheet" href="../static/css/portfolio.css">
+        <link rel="stylesheet" href="../static/css/footer.css">
+        <link rel="stylesheet" href="../static/css/portfolio/header.css">
+        <link rel="stylesheet" href="../static/css/portfolio/contact_panel.css">
+        <link rel="stylesheet" href="../static/css/portfolio/about_panel.css">
+        <link rel="stylesheet" href="../static/css/portfolio/project_panel.css">
+        <link rel="stylesheet" href="../static/css/portfolio/experience_panel.css">
+        <link rel="stylesheet" href="../static/css/portfolio/skills_panel.css">
+        <link rel="stylesheet" href="../static/css/portfolio/footer.css">
+        <link rel="stylesheet" href="../static/css/portfolio/other.css">
+        
+        <!-- Rubik font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+    <body id="body">
+        <header>
+            <nav>
+                <div id="logo_div_id">
+                    <a href="/main_page">ResumeOnly</a>
+                </div>
+
+                <div id="nav-menu">
+                    
+                    <div id="options_div_id">
+                        <ul>
+                            <li><a href="/main_page">Home</a></li>
+                            <li><a href="/analyse_resume">Resume Score</a></li>
+                            <!-- <li><a href="/analyse_applicants">Top Applicants</a></li> -->
+                        </ul>
+                    </div>
+                    
+                    <div id="accout_div_id">
+                        <div id="sign_in_up_id">
+                            <a href="/login" id="sign_in_id">Sign in</a>
+                            <a href="/register" id="register_id">Register</a>
+                        </div>
+                        
+                        <div id="user_div_id">
+                            <ul>
+                                <li id="log_out_id">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    <label>Log Out</label>
+                                </li>
+                                <li id="account_id">
+                                    <span class="material-symbols-outlined">account_circle</span>
+                                    <label href="">Account</label>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                    
+                <span class="material-symbols-outlined menu-icon">menu</span>
+            </nav>
+        </header>
+
+        <div class="publish-edit">
+            <div>
+                <input type="text" id="portfolio-input" value="ResumeOnly.com/portfolio/">
+                <a id="edit-portfolio">
+                    <span class="material-symbols-outlined">edit</span>
+                    Edit
+                </a>
+                <a id="save-portfolio">
+                    <span class="material-symbols-outlined">save</span>
+                    Save
+                </a>
+                <a id="publish-portfolio">Publish</a>
+            </div>
+        </div>
+
+        <section>
+            
+            <div>
+                <div class="loader" id="loader"></div>
+                
+            </div>
+
+        </section>
+        
+
+        <footer>
+            <div>
+                <a class="website-name" href="/main_page">ResumeOnly</a>
+                <div>
+                    <ul>
+                        <li><a href="/main_page">Home</a></li>
+                        <li><a href="/analyse_resume">Resume Score</a></li>
+                    </ul>
+                </div>
+
+                <div id="rights">
+                    <span class="material-symbols-outlined">copyright</span>
+                    <p>2025 <a href="https://mohamed-rouane.fpr.net">Mohamed Rouane</a>. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        
+        <div id="user-info" data-user_id="{{ user_id }}" data-application_id="{{ application_id }}"></div>
+
+        <script src="../static/javascript/session_management.js"></script>
+        <script src="../static/javascript/portfolio.js"></script>
+        <script src="../static/javascript/portfolio/header.js"></script>
+        <script src="../static/javascript/portfolio/welcome.js"></script>
+        <script src="../static/javascript/portfolio/contact_panel.js"></script>
+        <script src="../static/javascript/portfolio/projects_panel.js"></script>
+    </body>
+</html>
+
+
+<!-- > create a table in the database for the published websites -->
+<!-- > interview questions -->
+
+
+<!-- ! Done -->
+<!-- > loading circle after the submit button -->
+<!-- > error handling for every fetch, catch -->

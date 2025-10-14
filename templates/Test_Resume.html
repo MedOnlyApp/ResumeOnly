@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ResumeOnly - Test your Resume</title>
+        <link rel="stylesheet" href="../static/css/nav_bar.css">
+        <link rel="stylesheet" href="../static/css/test_resume.css">
+        <link rel="stylesheet" href="../static/css/footer.css">
+
+        <!-- Rubik font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div id="logo_div_id">
+                    <a href="/main_page">ResumeOnly</a>
+                </div>
+
+                <div id="nav-menu">
+
+                    <div id="options_div_id">
+                        <ul>
+                            <li><a href="/main_page">Home</a></li>
+                            <li><a href="/analyse_resume">Resume Score</a></li>
+                            <!-- <li><a href="/analyse_applicants">Top Applicants</a></li> -->
+                        </ul>
+                    </div>
+                    <div id="accout_div_id">
+                        <div id="sign_in_up_id">
+                            <a href="/login" id="sign_in_id">Sign in</a>
+                            <a href="/register" id="register_id">Register</a>
+                        </div>
+
+                        <div id="user_div_id">
+                            <ul>
+                                <li id="log_out_id">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    <label>Log Out</label>
+                                </li>
+                                <li id="account_id">
+                                    <span class="material-symbols-outlined">account_circle</span>
+                                    <label href="">Account</label>
+                                </li>
+                            </ul>
+                            
+                        </div>
+
+                    </div>
+                </div>
+
+                <span class="material-symbols-outlined menu-icon">menu</span>
+            </nav>
+        </header>
+
+        <main>
+
+            <div id="form_id">
+                <!-- <form action="/upload_resume" method="POST" enctype="multipart/form-data"> -->
+                <form id="submit_form" method="POST" enctype="multipart/form-data">
+                    <div id="job_title_div">
+                        <label for="job_title">Job title </label>
+                        <input name="job_title" id="job_title_id" required>
+                    </div>
+                        
+                    <div id="job_description_div">
+                        <label for="job_description">Job description </label>
+                        <textarea name="job_description" id="job_description_id" cols="50" rows="10" required></textarea>
+                    </div>
+                    
+                    <div id="upload_resume_div">
+                        <img src="../static/img/upload_file.svg" alt="file">
+                        <span class="upload_resume_label_1">Drag Resume Here</span>
+                        <span class="upload_resume_label_2">or 
+                            <label for="resumes_input_id" style="color: rgb(66, 135, 253);">upload resume</label>
+                        </span>
+                        
+                        <input type="file" name="resumes" id="resumes_input_id" accept=".pdf" required style="display: none;">
+                    </div>
+                
+                    <div id="uploaded_resumes_container">
+                        <!-- <div class="pdf_file">
+                            <div class="name">
+                                <img src="../static/img/pdf1.png" alt="pdf">
+                                <span>Resume</span>
+                            </div>
+                            <div>
+                                <span id="remove_button_id">
+                                    <img src="../static/img/close.svg" alt="">
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                
+                    <div id="submit_div">
+                        <input type="submit" id="submit_input">
+                        <input type="reset" id="reset_input">
+                    </div>
+                    
+                </form>
+            </div>
+        
+        
+            <div id="score_panel_id">
+
+                <div id="resume_info_div">
+                    <div id="score_paragraph_div">
+                        <div id="text_div">
+                            <h1>Score</h1>
+                            <h1></h1>
+                        </div>
+                        <div id="panel_div">
+                            <span id="score_id"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="resume_panel_div">
+
+                        <div id="name_picture_div">
+                            <h1></h1>
+                            <span>
+                                <h1></h1>
+                                <!-- <img src="../static/img/resume.jpg" alt=""> -->
+                                <img src="" alt="">
+                            </span>
+                        </div>
+    
+                        <div id="personal_details_paragraph_div">
+                            <h3>Personal Information</h3>
+                            <div id="personal_details_div">
+                                <h4>About</h4>
+                                <p></p>
+                                <div>
+                                    <a href="" id="email_span">
+                                        <img src="../static/img/email.svg" alt="">
+                                    </a>
+                                    <a href="" id="tel_span">
+                                        <img src="../static/img/phone.svg" alt="">
+                                    </a>
+                                    <a href="" id="linkedin_span">
+                                        <img src="../static/img/linkedin1.png" alt="">
+                                    </a>
+                                    <a href="" id="github_span">
+                                        <img src="../static/img/github.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="skills_paragraph_div">
+                            <h3>Skills</h3>
+                            <div id="skills_div">
+                            </div>
+                        </div>
+
+                        <!-- <div id="questions_paragraph_div">
+                            <h3>Interview Questions</h3>
+                            <div id="questions_div">
+                            </div>
+                        </div> -->
+
+                    </div>
+                    
+                    <div>
+                        
+                        <a href="/portfolio"><span class="material-symbols-outlined">wand_shine</span>Generate Portfolio</a>
+                    </div>
+
+                </div>
+            </div>
+            
+        </main>
+
+        <footer>
+            <div>
+                <a class="website-name" href="/main_page">ResumeOnly</a>
+                <div>
+                    <ul>
+                        <li><a href="/main_page">Home</a></li>
+                        <li><a href="/analyse_resume">Resume Score</a></li>
+                    </ul>
+                </div>
+
+                <div id="rights">
+                    <!-- <img src="../static/img/copyright.svg" alt=""> -->
+                    <span class="material-symbols-outlined">copyright</span>
+                    <p>2025 <a href="/main_page">ResumeOnly</a>. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <div id="user-info" data-user-id="{{ user_id }}"></div>
+
+        <!-- <a href="/">Login</a> -->
+        <script src="../static/javascript/nav.js"></script>
+        <script src="../static/javascript/test_resume.js"></script>
+        <script src="../static/javascript/session_management.js"></script>
+        <!-- <script src="../static/javascript/test.js"></script> -->
+    </body>
+</html>

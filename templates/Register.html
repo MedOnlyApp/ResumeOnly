@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ResumeOnly - Register</title>
+        <link rel="stylesheet" href="../static/css/Register.css">
+        <link rel="stylesheet" href="../static/css/error-panel.css">
+
+        <!-- Rubik font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <main>
+
+            <form method="POST" id="registration_form" autocomplete="off">
+                <h1>Register</h1>
+                
+                <div>
+                    <label>Name *</label>
+                    <input type="text" id="name_id" name="name" required>
+                </div>
+    
+                <div>
+                    <label>Username *</label>
+                    <input type="text" id="username_id" name="username" required>
+                </div>
+    
+                <div>
+                    <label>Email *</label>
+                    <input type="email" id="email_class" name="email" required>
+                </div>
+                
+                <div>
+                    <label>Password *</label>
+                    <input type="password" id="password_class" name="password" required>
+    
+                </div>
+    
+                <div>
+                    <label>Confirm *</label>
+                    <input type="password" id="password_confirm_class" name="password_confirm" required>
+
+                </div>
+    
+                <p id="error_message">User already exist, Login</p>
+                <!-- <p id="error_passwords_match">The passwords don't match</p> -->
+    
+                <div>
+                    <button id="submit_button">Register</button>
+                </div>
+                <p>Already have an account? <a href="\login">Login</a></p>
+            </form>
+
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="module" src="../static/javascript/Register.js"></script>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ResumeOnly - Account</title>
+        <link rel="stylesheet" href="../static/css/nav_bar.css">
+        <link rel="stylesheet" href="../static/css/profile.css">
+        <link rel="stylesheet" href="../static/css/footer.css">
+
+        <!-- Rubik font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div id="logo_div_id">
+                    <a href="/main_page">ResumeOnly</a>
+                </div>
+
+                <div id="nav-menu">
+                    
+                    <div id="options_div_id">
+                        <ul>
+                            <li><a href="/main_page">Home</a></li>
+                            <li><a href="/analyse_resume">Resume Score</a></li>
+                            <!-- <li><a href="/analyse_applicants">Top Applicants</a></li> -->
+                        </ul>
+                    </div>
+                    
+                    <div id="accout_div_id">
+                        <div id="sign_in_up_id">
+                            <a href="/login" id="sign_in_id">Sign in</a>
+                            <a href="/register" id="register_id">Register</a>
+                        </div>
+                        
+                        <div id="user_div_id">
+                            <ul>
+                                <li id="log_out_id">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    <label>Log Out</label>
+                                </li>
+                                <li id="account_id">
+                                    <span class="material-symbols-outlined">account_circle</span>
+                                    <label href="">Account</label>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                    
+                <span class="material-symbols-outlined menu-icon">menu</span>
+            </nav>
+        </header>
+
+        <main>
+
+            <div id="database_panel">
+                <div id="account_info_div">
+                    <div id="profile_image_div">
+                        <div class="picture">
+                            <img src="../static/img/account.svg" alt="">
+                            <label id="add_image_div" for="profile_img_input">
+                                <img src="../static/img/add.svg" alt="">
+                            </label>
+                        </div>
+                    </div>
+
+                    <input type="file" id="profile_img_input" accept=".jpg, .jpeg" style="display: none;">
+
+                    <div id="saved_info_div">
+
+                        <h1></h1>
+                        <h2></h2>
+                        <p></p>
+                        <span class="edit_span">
+                            <!-- <img src="../static/img/edit.svg" alt=""> -->
+                            Edit Profile
+                        </span>
+                    </div>
+
+                    <div id="editing_panel">
+                        <h5>Name</h5>
+                        <input type="text" id="name_input_id" placeholder="Full Name">
+                        <h5>Bio</h5>
+                        <textarea name="" id="name_input_id"></textarea>
+                        <div>
+                            <span class="save_span">
+                                save
+                            </span>
+                            <span class="cancel_span">
+                                cancel
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="applications_history_panel">
+
+                    <div id="title_div">Your Applications History</div>
+                    <div id="history_div">
+                        <table>
+                            <tr class="table_header">
+                                <!-- <th class="first">Id</th> -->
+                                <th>Job title</th>
+                                <th>Resume name</th>
+                                <th>Score</th>
+                                <th>date</th>
+                                <th class="last modification_header">Modifications</th>
+                            </tr>
+        
+                        </table>
+
+ 
+                   
+                    </div>
+                
+                </div>
+            </div>
+            
+        </main>
+
+        <footer>
+            <div>
+                <a class="website-name" href="/main_page">ResumeOnly</a>
+                <p>Fueling Innovation with Data</p>
+                <div>
+                    <ul>
+                        <li><a href="/main_page">Home</a></li>
+                        <li><a href="/analyse_resume">Resume Score</a></li>
+                    </ul>
+                </div>
+
+                <div id="rights">
+                    <!-- <img src="../static/img/copyright.svg" alt=""> -->
+                    <span class="material-symbols-outlined">copyright</span>
+                    <p>2025 <a href="https://mohamed-rouane.fpr.net">Mohamed Rouane</a>. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <div id="user-info" data-user-id="{{ user_id }}"></div>
+
+        <script src="../static/javascript/nav.js"></script>
+        <script src="../static/javascript/profile.js"></script>
+        <script src="../static/javascript/session_management.js"></script>
+    </body>
+</html>

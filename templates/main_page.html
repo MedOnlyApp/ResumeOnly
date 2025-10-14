@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ResumeOnly</title>
+        <link rel="stylesheet" href="../static/css/nav_bar.css">
+        <link rel="stylesheet" href="../static/css/main_page.css">
+        <link rel="stylesheet" href="../static/css/footer.css">
+        
+        <!-- Rubik font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div id="logo_div_id">
+                    <a href="/main_page">ResumeOnly</a>
+                </div>
+
+                <div id="nav-menu">
+                    
+                    <div id="options_div_id">
+                        <ul>
+                            <li><a href="/main_page">Home</a></li>
+                            <li><a href="/analyse_resume">Resume Score</a></li>
+                            <!-- <li><a href="/analyse_applicants">Top Applicants</a></li> -->
+                        </ul>
+                    </div>
+                    
+                    <div id="accout_div_id">
+                        <div id="sign_in_up_id">
+                            <a href="/login" id="sign_in_id">Sign in</a>
+                            <a href="/register" id="register_id">Register</a>
+                        </div>
+                        
+                        <div id="user_div_id">
+                            <ul>
+                                <li id="log_out_id">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    <label>Log Out</label>
+                                </li>
+                                <li id="account_id">
+                                    <span class="material-symbols-outlined">account_circle</span>
+                                    <label href="">Account</label>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                    
+                <span class="material-symbols-outlined menu-icon">menu</span>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+
+                <div id="description_div_id">
+                    <h1>Enhance your chances to get hired at top companies with <span>Resume Analyser</span></h1>
+                    
+                    <p>Upload your resume to get instant feedback and match insights based on job descriptions.</p>
+                    
+                    <div>
+                        <a href="/analyse_resume" id="analyse_resume_button">Get Your Resume Score</a>
+                        <!-- <a href="/analyse_applicants" id="find_applicants_button">Find Top Applicants</a> -->
+                    </div>
+
+                </div>
+                
+                <div id="picture_div_id">
+                    <img src="../static/img/main-2.png" alt="resume">
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div>
+                <a class="website-name" href="/main_page">ResumeOnly</a>
+                <div>
+                    <ul>
+                        <li><a href="/main_page">Home</a></li>
+                        <li><a href="/analyse_resume">Resume Score</a></li>
+                    </ul>
+                </div>
+
+                <div id="rights">
+                    <!-- <img src="../static/img/copyright.svg" alt=""> -->
+                    <span class="material-symbols-outlined">copyright</span>
+                    <p>2025 <a href="/main_page">ResumeOnly</a>. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        
+        <div id="user-info" data-user-id="{{ user_id }}"></div>
+
+        <script src="../static/javascript/nav.js"></script>
+        <script src="../static/javascript/main_page.js"></script>
+        <script src="../static/javascript/session_management.js"></script>
+    </body>
+</html>

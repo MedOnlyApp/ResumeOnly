@@ -1,26 +1,21 @@
-dotenv
-os
-pymupdf
-re
+# Environment variables
+python-dotenv
+
+# Web framework
+Flask
+
+# NLP and text processing
+spacy
 nltk
 pyresparser
-threading
-groq
-json5
-base64
-tempfile
-sqlite3
-uuid
-datetime
-flask
-database
-uuid
-os
-backend
-base64
-time
-json5
-secrets
 
-spacy
+# Database
+pymupdf
+sqlite3-binary  # optional: only if you need SQLite extras; stdlib sqlite3 doesn’t need this
+
+# External APIs / tools
+groq
+requests  # if you make HTTP requests
+
+# Large English spaCy model
 https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl

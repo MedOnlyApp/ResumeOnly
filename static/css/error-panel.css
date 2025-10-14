@@ -1,0 +1,59 @@
+.error-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.556);
+
+    z-index: 100;
+
+    font-family: Rubik;
+}
+
+.error-panel > span {
+    width: 300px;
+    height: fit-content;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 25px;
+
+    box-sizing: border-box;
+    padding: 25px 20px;
+
+    border-radius: 20px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.error-panel > span > h2 {
+    text-align: center;
+    margin: 0;
+}
+
+.error-panel > span > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-panel > span > div > button {
+    width: 100px;
+    height: 40px;
+
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: blue;
+    border: solid 2px blue;
+}
+

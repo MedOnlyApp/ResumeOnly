@@ -1,0 +1,151 @@
+#experience_id {
+    box-sizing: border-box;
+    padding: 85px 15%;
+
+    /* background-color: rgba(27, 36, 56, 0.8);
+    backdrop-filter: blur(65px); */
+
+    /* background-color: #d4d4d4; */
+    background-color: #b3b3b3;
+
+    border: solid;
+    border-width: 1px 0 0 0;
+    border-color: rgba(235, 235, 235, 0.995);
+
+}
+
+#experience_id > #experience_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}
+
+#experience_id > #experience_header > h1 {
+    text-align: center;
+    color: black;
+}
+
+#experience_id > #experience_header > p {
+    margin-top: 0;
+    font-size: larger;
+    font-weight: lighter;
+
+    text-align: center;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+#experience_id > #experience_header > .header-section-decore {
+    display: inline;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 5px;
+    
+    background-image: linear-gradient(90deg, #363434, #5c5c5f, rgb(198, 198, 198), #5c5c5f, #363434);
+    background-size: 400%;
+    background-position: left;
+    animation: moving_gradient 5s infinite ease-in-out alternate;
+    
+    border-radius: 5px;
+
+}
+
+
+#experience_id > #experience_body {
+    margin-top: 70px;
+    position: relative;
+}
+
+#experience_id > #experience_body > div {
+    width: 100%;
+
+    border: solid;
+    border-width: 0 0 0 1px;
+    border-color: rgba(0, 0, 0, 0.621);
+
+    box-sizing: border-box;
+    padding: 0 5vw 20px 30px;
+}
+
+#experience_id > #experience_body > span {
+    position: absolute;
+    left: -5px;
+    display: inline;
+    width: 7px;
+    height: 7px;
+    background-color: rgb(0, 0, 0);
+
+    border: solid;
+    border-radius: 50%;
+    border-width: 3px;
+    border-color: #b3b3b3;
+    
+    z-index: 2;
+}
+
+#experience_id > #experience_body > div > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#experience_id > #experience_body > div > div > .experience_time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 15px;
+    color: black;
+}
+
+#experience_id > #experience_body > div > div > div > .location_icon {
+    font-size: 15px;
+    font-weight: lighter;
+    color: rgba(3, 3, 3, 0.618);
+    padding: 0 5px 0 10px;
+}
+
+#experience_id > #experience_body > div > div > div > .location {
+    font-size: 15px;
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.618);
+}
+
+#experience_id > #experience_body > div > h2 {
+    margin: 5px 0;
+    font-weight: 500;
+    font-size: 22px;
+    color: black;
+}
+
+#experience_id > #experience_body > div > .experience_org {
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.618);
+}
+
+#experience_id > #experience_body > div > p {
+    font-size: 17px;
+    font-weight: lighter;
+    color: black;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    #experience_id > #experience_body > div > div {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        gap: 10px;
+    }
+}

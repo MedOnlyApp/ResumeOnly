@@ -1,0 +1,195 @@
+
+body {
+    margin: 0;
+    /* position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    display: flex;
+    flex-direction: column;
+
+    font-family: Rubik;
+    min-width: 430px;
+    color: rgb(0, 0, 0);
+    /* background-color: rgba(0, 0, 0, 0.805); */
+    background: radial-gradient(rgb(123, 202, 231), rgb(255, 255, 255), rgb(123, 202, 231));
+
+}
+
+.publish-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.publish-edit > div {
+    width: 90vw;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+
+    background-color: rgb(147, 143, 143);
+}
+
+.publish-edit > div > input {
+    width: 40vw;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px;
+
+    font-size: medium;
+}
+
+.publish-edit > div > a {
+    height: 35px;
+    text-decoration: none;
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    border: solid 1px blue;
+
+    box-sizing: border-box;
+    padding: 5px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.publish-edit > div > #save-portfolio {
+    display: none;
+}
+
+.publish-edit > div > a:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+section {
+    /* width: 70vw; */
+    position: relative;
+    
+    /* background-color: white; */
+    
+    display: flex;
+    justify-content: center;
+}
+
+section > div > .loader {
+    border: 6px solid #f3f3f3; /* light gray */
+    border-top: 6px solid #3498db; /* blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    /* display: none; */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+section > div {
+    width: 90vw;
+    min-height: 40vw;
+    background-color: rgb(255, 255, 255);
+
+    border: solid 2px black;
+    border-radius: 5px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.message-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.556);
+
+    z-index: 100;
+}
+
+.message-panel > span {
+    width: 300px;
+    /* height: 200px; */
+    height: fit-content;
+    
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-between;
+    gap: 25px;
+
+    box-sizing: border-box;
+    padding: 25px 20px;
+
+    border-radius: 20px;
+
+    background-color: rgb(255, 255, 255);
+}
+
+.message-panel > span > h2 {
+    text-align: center;
+    margin: 0;
+}
+
+.message-panel > span > h4 {
+    margin: 0;
+}
+
+.message-panel > span > input {
+    height: 30px;
+    border: solid 2px black;
+    border-radius: 5px;
+}
+
+.message-panel > span > textarea {
+    height: 60px;
+    border: solid 2px black;
+    border-radius: 5px;
+    resize: none;
+}
+
+.message-panel > span > div:last-child {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 50px;
+}
+
+.message-panel > span > div > button {
+    width: 100px;
+    height: 40px;
+
+    border-radius: 5px;
+}
+
+.message-panel > span > div > button:first-child {
+    background-color: white;
+    color: black;
+    border: solid 2px blue;
+}
+
+.message-panel > span > div > button:last-child {
+    background-color: blue;
+    color: white;
+    border: solid 2px blue;
+}

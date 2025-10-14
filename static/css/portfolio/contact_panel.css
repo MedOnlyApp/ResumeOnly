@@ -1,0 +1,108 @@
+#contact_id_2 {
+    box-sizing: border-box;
+    padding: 85px 10%;
+    position: relative;
+    /* background-color: rgba(27, 36, 56, 0.8); */
+    /* backdrop-filter: blur(65px); */
+    
+    /* background-color: rgb(205, 200, 200); */
+    background-color: #b3b3b3;
+
+    color: black;
+
+    border: solid;
+    border-width: 1px 0 0 0;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+#contact_id_2 > #contact_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 50px;
+}
+
+#contact_id_2 > #experience_header > h1 {
+    text-align: center;
+    color: black;
+}
+
+#contact_id_2 > #contact_header > p {
+    margin-top: 0;
+    font-size: larger;
+    font-weight: lighter;
+
+    text-align: center;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+#contact_id_2 > #contact_header > .header-section-decore {
+    display: inline;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100px;
+    height: 5px;
+
+    background-image: linear-gradient(90deg, #363434, #5c5c5f, rgb(198, 198, 198), #5c5c5f, #363434);
+    background-size: 400%;
+    background-position: left;
+    animation: moving_gradient 5s infinite ease-in-out alternate;
+    
+    border-radius: 5px;
+}
+
+#contact_id_2 > #contact_body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 5%;
+
+    background-color: rgba(104, 102, 102, 0.528);
+    border-radius: 10px;
+
+    box-sizing: border-box;
+    padding: 50px 10px;
+    position: relative;
+}
+
+#contact_id_2 > #contact_body > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+#contact_id_2 > #contact_body > div > img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: solid 2px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 50px rgb(6, 6, 6);
+    border-radius: 50%;
+    box-sizing: border-box;
+    padding: 5px;
+
+    position: relative;
+
+    width: 40px;
+}
+
+/* #contact_id_2 > #contact_body > div > span {
+    color: white;
+}
+ */
+@media only screen and (max-width: 700px) {
+    #contact_id_2 > #contact_body {
+        grid-template-columns: 1fr;
+    }
+
+}

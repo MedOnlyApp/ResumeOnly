@@ -1,0 +1,193 @@
+/* 
+body{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(rgb(123, 202, 231), rgb(255, 255, 255));
+    background-clip: content-box;
+}
+
+form {
+    width: 400px;
+    height: 90%;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5%;
+    background-color: rgba(30, 27, 33, 0.575);
+    color: white;
+} */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: radial-gradient(rgb(123, 202, 231), rgb(255, 255, 255));
+    background-clip: content-box;
+}
+
+main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: transparent;
+
+    padding: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+}
+
+
+form {
+    width: 400px;
+    /* height: 100%; */
+    height: fit-content;
+    border-radius: 10px;
+    padding: 50px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.717);
+
+    font-family: Rubik;
+}
+
+h1 {
+    margin: 0;
+}
+
+
+div, button {
+    display: block;
+    width: 70%;
+    position: relative;
+}
+
+button {
+    width: 70%;
+    height: 50px;
+    border-radius: 5px;
+    border: solid;
+    border-width: 1px;
+
+    font-size: 20px;
+    background-color: rgb(81, 81, 255);
+    color: white;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.664);
+
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: rgb(111, 111, 111);
+    font-size: larger;
+    color: rgb(0, 0, 0);
+
+    margin-top: 10px;
+}
+
+.code-input {
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.5rem; /* spread out the dashes/numbers */
+}
+
+.code-input::placeholder {
+  letter-spacing: 0.5rem; /* make dashes spread evenly */
+}
+
+/* input:focus {
+    outline: none;
+} */
+
+/* label {
+    position: absolute;
+    transform: translateY(-40px);
+} */
+
+span {
+    font-size: larger;
+    position: absolute;
+    left: calc(15px * var(--i));
+    transition: transform 0.3s;
+    transition-delay: calc(0.1s * var(--i));
+    cursor: text;
+}
+
+.moh {
+    transform: translateY(-25px);
+}
+
+
+button {
+    border-radius: 5px;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(98, 168, 255);
+}
+
+.password-visibility {
+    /* display: flex; */
+    /* width: 15px; */
+    background-color: rgb(97, 65, 118);
+    position: absolute;
+    right: -5px;
+    top: 15px;
+}
+
+/* .password-visibility img {
+    position: absolute;
+    right: 0;
+} */
+
+#hidden {
+    display: none;
+}
+
+#error_message {
+    margin: 0;
+    display: none;
+    color: rgb(243, 121, 121);
+}
+
+#error_passwords_match {
+    margin: 0;
+    display: none;
+    color: rgb(243, 121, 121);
+}
+
+p {
+    margin: 0;
+}

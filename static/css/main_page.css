@@ -1,0 +1,259 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    /* position: relative; */
+    margin: 0;
+    background: radial-gradient(rgb(123, 202, 231), rgb(255, 255, 255));
+    background-clip: content-box;
+    height: fit-content;
+}
+
+
+/* > Main */ 
+main > section {
+    /* max-width: 100vw; */
+    overflow: hidden;
+    background-color: transparent;
+
+    padding: 5vw;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+    z-index: 0;
+}
+
+main > section > #description_div_id {
+    min-width: 40%;
+    /* height: 100%; */
+}
+
+main > section > #description_div_id > h1 {
+    font-weight: 500;
+    /* font-size: 58px; */
+    font-size: 3.8vw;
+    font-family: Rubik;
+    font-style: normal;
+    /* line-height: 76px; */
+    line-height: 5vw;
+
+    color: rgb(68, 68, 68);
+}
+
+main > section > #description_div_id > h1 > span {
+    /* color: rgb(93, 115, 187); */
+    background: radial-gradient(rgb(238, 28, 133), rgb(37, 8, 203));
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+
+    animation: text_color 5s ease-in-out infinite;
+}
+
+main > section > #description_div_id > p {
+    font-family: Rubik;
+    /* font-size: 18px; */
+    font-size: 1.3vw;
+    font-weight: 500;
+}
+
+main > section > #description_div_id > div {
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+
+}
+
+main > section > #description_div_id > div > #analyse_resume_button {
+    text-decoration: none;
+    height: 50px;
+    width: 250px;
+    border-radius: 5px;
+
+    margin-right: 20px;
+    background: linear-gradient(rgb(206, 187, 223), rgb(181, 87, 215));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    font-family: Rubik;
+}
+
+main > section > #description_div_id > div > #find_applicants_button {
+    text-decoration: none;
+    height: 50px;
+    width: 246px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+
+    margin-right: 20px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(67, 67, 67);
+
+    font-family: Rubik;
+}
+
+@keyframes text_color {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+#picture_div_id {
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+    perspective: 1000px;
+}
+
+#picture_div_id > img {
+    width: 35vw;
+    transform: rotateX(40deg) rotateY(-10deg) rotateZ(30deg);
+    background: transparent;
+    transition: transform 0.5s;
+}
+
+#picture_div_id > img:hover {
+    transform: rotateX(25deg) rotateY(-10deg) rotateZ(15deg);
+}
+
+form {
+    width: 400px;
+    height: 60%;
+    border-radius: 10px;
+    padding: 10px;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5%;
+    background-color: rgba(30, 27, 33, 0.575);
+    color: white;
+}
+
+
+@media only screen and (max-width: 700px) {
+    
+    main > section {
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        gap: 5vw;
+    }
+
+    main > section > div > h1 {
+        text-align: center;
+    }
+    
+    main > section > div > p {
+        text-align: center;
+    }
+    
+    main > section > div > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        gap: 5vw;
+    }
+
+    #picture_div_id > img {
+        transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+
+}
+
+/* h1 {
+    margin: 0;
+}
+
+
+div, button {
+    display: block;
+    width: 70%;
+    height: 50px;
+    position: relative;
+}
+
+input {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border-width: 0 0 2px 0px;
+    border-style: solid;
+    border-color: white;
+    font-size: larger;
+    color: white;
+}
+
+input:focus {
+    outline: none;
+}
+
+label {
+    position: absolute;
+    transform: translateY(-40px);
+}
+
+span {
+    font-size: larger;
+    position: absolute;
+    left: calc(15px * var(--i));
+    transition: transform 0.3s;
+    transition-delay: calc(0.1s * var(--i));
+    cursor: text;
+}
+
+.moh {
+    transform: translateY(-25px);
+}
+
+
+button {
+    border-radius: 5px;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(98, 168, 255);
+}
+
+#hidden {
+    display: none;
+}
+
+#error_message {
+    margin: 0;
+    display: none;
+    color: rgb(243, 121, 121);
+}
+
+#error_passwords_match {
+    margin: 0;
+    display: none;
+    color: rgb(243, 121, 121);
+}
+
+p {
+    margin: 0;
+} */

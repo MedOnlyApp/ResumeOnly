@@ -1,0 +1,320 @@
+/* html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+body{
+    margin: 0;
+    background: radial-gradient(rgb(123, 202, 231), rgb(255, 255, 255));
+    background-clip: content-box;
+}
+
+main {
+    background-color: transparent;
+    padding: 50px 30px 50px 30px;
+    
+    display: flex;
+    gap: 5%;
+    
+    z-index: 0;
+}
+
+#database_panel::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#database_panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#database_panel::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+#database_panel::-webkit-scrollbar-button {
+    display: none; /* Hides scrollbar arrows */
+}
+
+#database_panel {
+    width: 100%;
+    min-width: 800px;
+    min-height: 80vh;
+    height: fit-content;
+
+    background-color: rgba(255, 255, 255, 0.816);
+    border-radius: 10px;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 50px 50px 0 50px;
+
+    font-family: Rubik;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#database_panel > #account_info_div {
+    width: 30%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    position: relative;
+}
+
+#database_panel > #account_info_div > #profile_image_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#database_panel > #account_info_div > #profile_image_div > .picture {
+    position: relative;
+}
+
+#database_panel > #account_info_div > #profile_image_div > .picture > img {
+    max-width: 300px;
+    max-height: 300px;
+    width: 300px;
+    height: 300px;
+    /* width: 20vw;
+    height: 20vw; */
+    background-color: #888;
+    border-radius: 50%;
+}
+
+/* #database_panel > #account_info_div > #profile_image_div > #add_image_div {
+    position: relative;
+    cursor: pointer;
+} */
+
+#database_panel > #account_info_div > #profile_image_div > .picture > #add_image_div > img {
+    /* width: 300px; */
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.312);
+    
+    border-radius: 50%;
+    position: absolute;
+    right: 7%;
+    bottom: 10%;
+
+    /* left: 250px; */
+    /* top: -80px; */
+
+    cursor: pointer;
+}
+
+#database_panel > #account_info_div > div > h1 {
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+#database_panel > #account_info_div > div > h2 {
+    font-weight: 400;
+    padding: 0;
+    margin-top: 0;
+}
+
+#database_panel > #account_info_div > div > span {
+    /* display: inline-block; */
+    /* width: 80px; */
+    height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    padding: 0 5px;
+    margin: 0 5px 0 5px;
+    background-color: #f3f3f3;
+    cursor: pointer;
+}
+
+#database_panel > #account_info_div > #editing_panel {
+    display: none;
+}
+
+#database_panel > #account_info_div > #editing_panel > h5 {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#database_panel > #account_info_div > #editing_panel > input {
+    width: 90%;
+    height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    color: black;
+    background-color: #ffffff;
+}
+
+#database_panel > #account_info_div > #editing_panel > textarea {
+    width: 90%;
+    height: 100px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    color: black;
+    background-color: #ffffff;
+}
+
+#database_panel > #account_info_div > #editing_panel > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save_span {
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+.cancel_span {
+    background-color: rgb(204, 215, 204);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+#database_panel > #account_info_div > #editing_panel > div > span {
+    width: 20%;
+    height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    /* color: black; */
+    padding: 0 5px;
+    margin: 0 5px 0 5px;
+    /* background-color: #f3f3f3; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#database_panel > #applications_history_panel {
+    width: 70%;
+    height: 100%;
+}
+
+#database_panel > #applications_history_panel > #title_div {
+    height: 10%;
+    /* background-color: yellow; */
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    font-size: larger;
+    font-weight: 500;
+}
+
+#database_panel > #applications_history_panel > #history_div {
+    height: 90%;
+
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+#database_panel > #applications_history_panel > #history_div > table {
+    width:100%;
+}
+
+table, th, td {
+    border: solid rgba(153, 153, 153, 0.234);
+    border-width: 0 0 1px 0;
+    border-collapse: collapse;
+}
+
+.modification_header {
+    width: 20px;
+}
+
+.modification_colomn {
+    /* width: fit-content; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: none;
+
+    height: 40px;
+}
+
+tr {
+    height: 40px;
+}
+
+td > span {
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    padding: 0 5px;
+    margin: 0 5px 0 5px;
+}
+
+td > .delete_span {
+    background-color: red;
+    cursor: pointer;
+}
+
+#account_info_div {
+    height: fit-content;
+}
+
+
+@media only screen and (max-width: 1350px) {
+
+    #database_panel {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: baseline; */
+        align-items: baseline;
+        gap: 20px;
+    }
+
+    #database_panel > #account_info_div {
+        width: 100%;
+        /* height: 100%; */
+        display: flex;
+        flex-direction: row;
+        gap: 5%;
+    }
+    
+    #database_panel > #account_info_div > #profile_image_div > .picture > img {
+        width: 22.1vw;
+        height: 22.1vw;
+    }
+
+    #database_panel > #account_info_div > #profile_image_div > .picture > #add_image_div > img {
+        /* width: 300px; */
+        /* height: 40px; */
+        height: 2.96vw;
+    }
+
+    #database_panel > #account_info_div > #saved_info_div {
+        flex: 1;
+    }
+    
+    #database_panel > #applications_history_panel {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #database_panel > #applications_history_panel > #history_div {
+        width: 100%;
+    }
+
+
+}

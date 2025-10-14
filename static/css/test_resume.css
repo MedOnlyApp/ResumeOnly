@@ -1,0 +1,539 @@
+html, body {
+scroll-behavior: smooth;
+}
+
+body{
+    margin: 0;
+    background: radial-gradient(rgb(123, 202, 231), rgb(255, 255, 255));
+    background-clip: content-box;
+}
+
+main {
+    min-width: 350px;
+    background-color: transparent;
+
+    box-sizing: border-box;
+    padding: 50px 30px 50px 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    z-index: 0;
+}
+
+
+#form_id{
+    width: 100%;
+    /* height: 100%; */
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+}
+
+#submit_form {
+    width: 100%;
+    /* height: 100%; */
+    border-radius: 10px;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.647);
+    color: rgb(8, 8, 8);
+    
+    overflow: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#submit_form::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#submit_form::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#submit_form::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+#submit_form::-webkit-scrollbar-button {
+    display: none; /* Hides scrollbar arrows */
+}
+
+#job_title_div {
+    font-size: 20px;
+
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%;
+
+    margin: 20px 50px 20px 50px;
+}
+
+#job_title_div > input {
+    /* position: absolute;
+    left: 50%; */
+    width: 80%;
+    height: 32px;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: rgba(186, 166, 166, 0.52);
+    
+    font-size: 16px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    /* Add font */
+}
+
+#job_description_div {
+    font-size: 20px;
+    margin: 20px 50px 20px 50px;
+}
+
+#job_description_div > textarea {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: rgba(186, 166, 166, 0.52);
+    
+    padding: 1%;
+    font-size: large;
+    /* Add font */
+    
+    width: 98%;
+    resize: none;
+}
+
+#upload_resume_div {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: rgba(186, 166, 166, 0.52);
+
+    height: 100px;
+
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: x-large;
+
+    margin: 20px 50px 20px 50px;
+}
+
+#upload_resume_div.dragover {
+    background-color: #c0d2e1;
+
+    border-style: dashed;
+    border-width: 10px;
+}
+
+#upload_resume_div > .upload_resume_label_1 {
+    font-size: inherit;
+}
+
+#upload_resume_div > .upload_resume_label_2 {
+    font-size: large;
+}
+
+#submit_div {
+    margin: 20px 50px 20px 50px;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+#submit_div > input {
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: white;
+    border: solid 3px blue;
+    font-family: Rubik;
+    font-size: 16px;
+
+    transition: 0.15s;
+}
+
+#submit_div > input:hover {
+    color: white;
+    background-color: blue;
+}
+
+#submit_input {
+    margin-right: 20px;
+}
+
+#reset_input {
+    margin-left: 20px;
+}
+
+#uploaded_resumes_container {
+    margin: 20px 50px 20px 50px;
+}
+
+.pdf_file {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: rgba(186, 166, 166, 0.52);
+    
+    margin-bottom: 5px;
+    padding: 0 10px 0 10px;
+
+    height: 40px;
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.pdf_file > div {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.pdf_file > .name > span {
+    margin-left: 10px;
+}
+
+/* > the div on the right */
+
+#score_panel_id {
+    background-color: rgba(255, 255, 255, 0.647);
+    width: 100%;
+    height: fit-content;
+    min-height: 70vh;
+    border-radius: 10px;
+    /* overflow: scroll; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#images_div_id {
+    height: 300px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(241, 228, 220);
+    border: none;
+    border-radius: 10px;
+
+}
+
+#images_div_id > span {
+    display: flex;
+    background-color: blue;
+    position: relative;
+}
+
+#magnifier_img_id {
+    position: absolute;
+    height: 50px;
+
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    animation: magnify 5s infinite;
+
+}
+
+.loader {
+    border: 6px solid #f3f3f3; /* light gray */
+    border-top: 6px solid #3498db; /* blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    /* display: none; */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+#resume_info_div::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#resume_info_div::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#resume_info_div::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+#resume_info_div::-webkit-scrollbar-button {
+    display: none; /* Hides scrollbar arrows */
+}
+
+#resume_info_div {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px;
+    overflow: auto;
+    /* background-color: #888; */
+    box-sizing: border-box;
+    padding: 20px;
+
+    font-family: Rubik;
+
+    display: none;
+}
+
+#resume_info_div > #score_paragraph_div, #resume_info_div > #resume_panel_div {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#resume_info_div > #score_paragraph_div > #text_div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#resume_info_div > #score_paragraph_div > #panel_div {
+    /* height: 20px; */
+    border-style: solid;
+    border-width: 1px;
+    height: 10px;
+    border-radius: 50px;
+    /* margin-bottom: 20px; */
+    position: relative;
+}
+
+#resume_info_div > #score_paragraph_div > div > span {
+    display: inline-block;
+    border-radius: 50px;
+    background-color: green;
+    height: 10px;
+    width: 0%;
+    position: absolute;
+    top: 0;
+
+    transition: width 1s ease;
+}
+
+#resume_info_div > #resume_panel_div > #name_picture_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#resume_info_div > #resume_panel_div > #name_picture_div > span {
+    display: inline-block;
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* font-size: 25px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#resume_info_div > #resume_panel_div > #name_picture_div > span > img {
+    display: none;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+#resume_info_div > #resume_panel_div > #personal_details_paragraph_div > #personal_details_div > p {
+    margin-left: 10px;
+}
+
+#resume_info_div > #resume_panel_div > #personal_details_paragraph_div > #personal_details_div > div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#resume_info_div > #resume_panel_div > #personal_details_paragraph_div > #personal_details_div > div > a {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: black;
+    color: white;
+    margin-bottom: 5px;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}    
+
+#skills_div, #personal_details_div {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 10px;
+    
+}
+
+#resume_info_div > #resume_panel_div > #skills_paragraph_div > #skills_div > span {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+#resume_info_div > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: black; */
+}
+
+#resume_info_div > div:last-child > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+#resume_info_div > div:last-child > a > span {
+    color: white;
+}
+
+
+
+
+@media only screen and (max-width: 400px) {
+
+    #upload_resume_div > .upload_resume_label_1 {
+        font-size: 5.8vw;
+    }
+
+    #upload_resume_div > .upload_resume_label_2 {
+        font-size: 4.4vw;
+    }
+
+
+}    
+    
+@media only screen and (max-width: 700px) {
+    
+    #job_title_div {
+        font-size: 20px;
+
+        flex-direction: column;
+        align-items: baseline;
+    }
+
+    #job_title_div > input {
+        width: 100%;
+    }
+
+    #resume_steps_div_id > div > label {
+        /* font-size: 30px; */
+        font-size: 4vw;
+        width: 100%;
+    }
+
+    #resume_steps_div_id > div > span {
+        width: 3.6vw;
+        height: 3.6vw;        
+    }
+
+
+
+}
+
+
+
+
+
+
+@keyframes magnify {
+  0%   {
+        left: 0;
+        top: 0;
+    }
+  10%  {
+        left: 80%;
+        top: 20%;
+    }
+  20%  {
+        left: 0%;
+        top: 40%;
+    }
+  30%  {
+        left: 80%;
+        top: 60%;
+    }
+  40%  {
+        left: 0;
+        top: 80%;
+    }
+  /* 50% {
+        left: 80%;
+        top: 100%;
+    } */
+  60%   {
+        left: 0;
+        top: 80%;
+    }
+  70%  {
+        left: 80%;
+        top: 60%;
+    }
+  80%  {
+        left: 0%;
+        top: 40%;
+    }
+  90%  {
+        left: 80%;
+        top: 20%;
+    }
+  100% {
+        left: 0;
+        top: 0%;
+    }
+
+}

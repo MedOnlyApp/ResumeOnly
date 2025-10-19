@@ -156,6 +156,23 @@ submit_form.addEventListener('submit', function(e) {
     })
     .catch(error => {
         console.error('Error:', error.message);
+        const body = document.querySelector("body")
+        body.insertAdjacentHTML("beforeend", `<div class="error-panel">
+                                            <span>
+                                                <h2>Error!</h2>
+                                                <p>$Try again Later.</p>
+                                                <div>
+                                                    <button>Ok</button>
+                                                </div>
+                                            </span>
+                                        </div>
+                                `)
+        const error_panel = document.querySelector(".error-panel")
+
+        error_panel.firstElementChild.lastElementChild.firstElementChild.addEventListener("click", () => {
+            error_panel.remove()
+            window.location.href = "/analyse_resume"
+        })
     });
 
 });
@@ -266,4 +283,5 @@ window.addEventListener("pageshow", function (event) {
     document.querySelector("form")?.reset();
     console.log("reseted2")
   }
+
 });

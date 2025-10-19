@@ -3,7 +3,6 @@ import os
 import pymupdf
 import re
 import nltk
-from pyresparser import ResumeParser
 from spacy import load
 # from sentence_transformers import SentenceTransformer
 # import numpy as np
@@ -15,7 +14,13 @@ import json5
 import base64
 import tempfile
 
-nltk.download('stopwords')
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+
+from pyresparser import ResumeParser
+# nltk.download('stopwords')
 
 class ExtractData:
     def __init__(self, file, job_description:str, job_title:str):
@@ -759,5 +764,6 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
     # obj.divide_paragraphs()
     # print(list(obj.text_paragraphs.keys()))
     # obj.paragraphs_font_size()
+
 
     

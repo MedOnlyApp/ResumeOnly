@@ -67,7 +67,8 @@ class ResumeParser(object):
         cust_ent = utils.extract_entities_wih_custom_model(
                             self.__custom_nlp
                         )
-        name = utils.extract_name(self.__nlp, matcher=self.__matcher)
+        # name = utils.extract_name(self.__nlp, matcher=self.__matcher)
+        name = self.extract_name(self.__nlp, matcher=self.__matcher)
         email = utils.extract_email(self.__text)
         mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
         skills = utils.extract_skills(
@@ -845,4 +846,5 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+
 

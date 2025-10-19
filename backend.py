@@ -135,6 +135,26 @@ class ResumeParser(object):
                                             self.__resume
                                         )
         return
+    def extract_name(nlp_text, matcher):
+        '''
+        Helper function to extract name from spacy nlp text
+
+        :param nlp_text: object of `spacy.tokens.doc.Doc`
+        :param matcher: object of `spacy.matcher.Matcher`
+        :return: string of full name
+        '''
+        from pyresparser import constants as cs
+        pattern = [cs.NAME_PATTERN]
+
+        # matcher.add('NAME', None, *pattern)
+        matcher.add('NAME', [p for p in pattern])
+
+        matches = matcher(nlp_text)
+
+        for _, start, end in matches:
+            span = nlp_text[start:end]
+            if 'name' not in span.text.lower():
+                return span.text
 
 
 class ExtractData:
@@ -825,3 +845,4 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+

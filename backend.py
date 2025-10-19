@@ -13,10 +13,12 @@ import json5
 import base64
 import tempfile
 
+print("trying")
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('stopwords')
+print("loaded")
 
 from pyresparser import ResumeParser
 # nltk.download('stopwords')
@@ -767,5 +769,6 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+
 
 

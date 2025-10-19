@@ -1,22 +1,21 @@
---prefer-binary
+--prefer-binary 
+# Environment variables 
+python-dotenv==1.1.1 
 
-# Environment variables
-python-dotenv==1.1.1
+# Web framework 
+Flask==3.1.0 
 
-# Web framework
-Flask==3.1.0
+# NLP and text processing 
+spacy==3.8.4 
+nltk==3.1.0 
+pyresparser==1.0.6 
 
-# NLP and text processing
-spacy==3.4.6
-nltk==3.7
-pyresparser==1.0.6
+# Database 
+pymupdf==1.25.5 
 
-# Database / file processing
-pymupdf==1.25.5
+# External APIs / tools 
+groq==0.22.0 
+requests==2.32.3 
 
-# External APIs / tools
-groq==0.22.0
-requests==2.32.3
-
-# Large English spaCy model compatible with spaCy 3.4.6
-https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.4.1/en_core_web_lg-3.4.1-py3-none-any.whl
+# Large English spaCy model 
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl

@@ -49,7 +49,8 @@ class ExtractData:
 
     def load_model(self):
         self.model_loaded = False
-        self.nlp = load("en_core_web_lg")
+        #self.nlp = load("en_core_web_lg")
+        self.nlp = load("en_core_web_sm", disable=["tagger", "parser", "lemmatizer", "textcat"])
         self.model_loaded = True
         # print("done model")
         return
@@ -766,4 +767,5 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+
 

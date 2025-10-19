@@ -29,12 +29,12 @@ class ResumeParser(object):
         skills_file=None,
         custom_regex=None
     ):
-        # nlp = spacy.load('en_core_web_sm')
+        nlp = spacy.load('en_core_web_sm')
         # custom_nlp = spacy.load(os.path.dirname(os.path.abspath(__file__)))
         self.custom_nlp = spacy.load('en_core_web_sm')
         self.__skills_file = skills_file
         self.__custom_regex = custom_regex
-        self.__matcher = Matcher(self.custom_nlp.vocab)
+        self.__matcher = Matcher(nlp.vocab)
         self.__details = {
             'name': None,
             'email': None,
@@ -56,7 +56,7 @@ class ResumeParser(object):
         self.__text_raw = utils.extract_text(self.__resume, '.' + ext)
         self.__text = ' '.join(self.__text_raw.split())
         self.__nlp = self.custom_nlp(self.__text)
-        self.__custom_nlp = self.custom_nlp(self.__text_raw)
+        self.__custom_nlp = nlp(self.__text_raw)
         self.__noun_chunks = list(self.__nlp.noun_chunks)
         self.__get_basic_details()
 
@@ -822,5 +822,6 @@ Our technology consultants and specialists partner with our clients and colleagu
 Boston Consulting Group is an Equal Opportunity Employer. All qualified applicants will receive consideration for employment without regard to race, color, age, religion, sex, sexual orientation, gender identity / expression, national origin, disability, protected veteran status, or any other characteristic protected under national, provincial, or local law, where applicable, and those with criminal histories will be considered in a manner consistent with applicable state and local laws."""
     
     job_title = "Data Engineer"
+
 
     

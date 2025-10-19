@@ -3,25 +3,139 @@ import os
 import pymupdf
 import re
 import nltk
+# from pyresparser import ResumeParser
 from spacy import load
-# from sentence_transformers import SentenceTransformer
-# import numpy as np
-from numpy import dot
 import threading
 from groq import Groq
 import json5
 import base64
 import tempfile
 
-print("trying")
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('stopwords')
-print("loaded")
+nltk.download('stopwords')
 
-from pyresparser import ResumeParser
-# nltk.download('stopwords')
+from pyresparser import utils
+
+
+import io
+import spacy
+from spacy.matcher import Matcher
+
+
+class ResumeParser(object):
+
+    def __init__(
+        self,
+        resume,
+        skills_file=None,
+        custom_regex=None
+    ):
+        # nlp = spacy.load('en_core_web_sm')
+        # custom_nlp = spacy.load(os.path.dirname(os.path.abspath(__file__)))
+        self.custom_nlp = spacy.load('en_core_web_sm')
+        self.__skills_file = skills_file
+        self.__custom_regex = custom_regex
+        self.__matcher = Matcher(self.custom_nlp.vocab)
+        self.__details = {
+            'name': None,
+            'email': None,
+            'mobile_number': None,
+            'skills': None,
+            'college_name': None,
+            'degree': None,
+            'designation': None,
+            'experience': None,
+            'company_names': None,
+            'no_of_pages': None,
+            'total_experience': None,
+        }
+        self.__resume = resume
+        if not isinstance(self.__resume, io.BytesIO):
+            ext = os.path.splitext(self.__resume)[1].split('.')[1]
+        else:
+            ext = self.__resume.name.split('.')[1]
+        self.__text_raw = utils.extract_text(self.__resume, '.' + ext)
+        self.__text = ' '.join(self.__text_raw.split())
+        self.__nlp = self.custom_nlp(self.__text)
+        self.__custom_nlp = self.custom_nlp(self.__text_raw)
+        self.__noun_chunks = list(self.__nlp.noun_chunks)
+        self.__get_basic_details()
+
+    def get_extracted_data(self):
+        return self.__details
+
+    def __get_basic_details(self):
+        cust_ent = utils.extract_entities_wih_custom_model(
+                            self.__custom_nlp
+                        )
+        name = utils.extract_name(self.__nlp, matcher=self.__matcher)
+        email = utils.extract_email(self.__text)
+        mobile = utils.extract_mobile_number(self.__text, self.__custom_regex)
+        skills = utils.extract_skills(
+                    self.__nlp,
+                    self.__noun_chunks,
+                    self.__skills_file
+                )
+        # edu = utils.extract_education(
+        #               [sent.string.strip() for sent in self.__nlp.sents]
+        #       )
+        entities = utils.extract_entity_sections_grad(self.__text_raw)
+
+        # extract name
+        try:
+            self.__details['name'] = cust_ent['Name'][0]
+        except (IndexError, KeyError):
+            self.__details['name'] = name
+
+        # extract email
+        self.__details['email'] = email
+
+        # extract mobile number
+        self.__details['mobile_number'] = mobile
+
+        # extract skills
+        self.__details['skills'] = skills
+
+        # extract college name
+        try:
+            self.__details['college_name'] = entities['College Name']
+        except KeyError:
+            pass
+
+        # extract education Degree
+        try:
+            self.__details['degree'] = cust_ent['Degree']
+        except KeyError:
+            pass
+
+        # extract designation
+        try:
+            self.__details['designation'] = cust_ent['Designation']
+        except KeyError:
+            pass
+
+        # extract company names
+        try:
+            self.__details['company_names'] = cust_ent['Companies worked at']
+        except KeyError:
+            pass
+
+        try:
+            self.__details['experience'] = entities['experience']
+            try:
+                exp = round(
+                    utils.get_total_experience(entities['experience']) / 12,
+                    2
+                )
+                self.__details['total_experience'] = exp
+            except KeyError:
+                self.__details['total_experience'] = 0
+        except KeyError:
+            self.__details['total_experience'] = 0
+        self.__details['no_of_pages'] = utils.get_number_of_pages(
+                                            self.__resume
+                                        )
+        return
+
 
 class ExtractData:
     def __init__(self, file, job_description:str, job_title:str):
@@ -31,16 +145,11 @@ class ExtractData:
         self.temp_path = temp.name
         temp.close()
 
-        # self.file_path = self.temp_path
         self.job_description = job_description
         # > Create a document object from the file path
         self.document = pymupdf.open(self.temp_path)
-        # self.document = pymupdf.open(file)
         # > Load the Spacy model
-        threading.Thread(target=self.load_model).start()
-        # > Load the nltk stop words
-        # # > Load the SentenceTransformer model
-        # threading.Thread(target=self.load_similarity_model).start()
+        # threading.Thread(target=self.load_model).start()
 
         # > connect to the chatbot
         load_dotenv()
@@ -51,19 +160,14 @@ class ExtractData:
 
     def load_model(self):
         self.model_loaded = False
-        #self.nlp = load("en_core_web_lg")
         self.nlp = load("en_core_web_sm", disable=["tagger", "parser", "lemmatizer", "textcat"])
         self.model_loaded = True
-        # print("done model")
         return
     
     def load_similarity_model(self):
         self.similarity_model_loaded = False
         # > Load the SentenceTransformer model
-        print("similarity model")
-        # self.model = SentenceTransformer('multi-qa-mpnet-base-cos-v1')
         self.similarity_model_loaded = True
-        print("done similarity model")
 
         return
 
@@ -87,9 +191,7 @@ class ExtractData:
         phone_pattern = r"^tel:"
         whatsapp_pattern = r"wa.me"
         github_pattern = r"github.com/"
-        # linkedin_pattern = r"www.linkedin.com/"
         linkedin_pattern = r"linkedin.com/"
-        # location_pattern = r"www.google.com/maps"
         location_pattern = r"\Wmaps\W"
 
         if re.search(link_pattern, link) != None:
@@ -149,7 +251,7 @@ class ExtractData:
 
         return fontsize_moy/i
 
-    def divide_paragraphs(self):     # ['lines'][0]["spans"][0]['size']
+    def divide_paragraphs(self):    
         """ Divide the text into paragraphs """
         headers = []
         Resume_text = ''
@@ -168,7 +270,7 @@ class ExtractData:
                     
                     is_bold = "Bold" in font_name or "bold" in font_name
 
-                    if font_size > fontsize_moy and is_bold:  # You can adjust the threshold
+                    if font_size > fontsize_moy and is_bold:  # > You can adjust the threshold
                         headers.append((Resume_text.index(header), header))
 
         headers.sort()
@@ -183,10 +285,6 @@ class ExtractData:
 
         self.text_paragraphs[headers[-1][1]] = Resume_text[headers[-1][0]+len(x[1]):]
         
-        # > Print the paragraphs separatly
-        # print(self.text_paragraphs.keys())
-        # for key, value in self.text_paragraphs.items():
-            # print(f"{key} : {value}", end='\n\n\n=====================================\n\n\n')
 
         return 
 
@@ -196,10 +294,8 @@ class ExtractData:
         liste = []
         for email in list(re.finditer(email_pattern, text)):
             liste.append({'email':email.group(), 'range':(email.start(), email.end())})    
-            # Example : {'email':'mohamed.rouane.23@ump.ac.ma', 'range':(10, 20)}
+            # > Example : {'email':'mohamed.rouane.23@ump.ac.ma', 'range':(10, 20)}
         
-        # print(*list(re.finditer(email_pattern, text)))
-
         return liste
 
     def find_phone_numbers(self, text:str):
@@ -207,8 +303,6 @@ class ExtractData:
         phone_pattern = r"((\+\d+)(\s?\(\d+\))?((-)?(\s?\d+))*)|((\d+\s)?(\(?\d+\)?)([\s-]?\d+)+)"
 
         phone_list = [{'phone':phone.group(), 'range':(phone.start(), phone.end())} for phone in re.finditer(phone_pattern, text) if phone.end()-phone.start() >= 7]
-        # print(*list(re.finditer(phone_pattern, text)), sep="\n")
-        # print(*phone_list, sep="\n")
 
         return phone_list
 
@@ -261,10 +355,7 @@ class ExtractData:
                     break
         
             self.paragraph_blocks[header] += blocks[start_index:end_index]
-        # print(self.Font_Size_Threshold(paragraph_blocks))
-        # print(*list(self.paragraphs_headers.items()), sep='\n\n===============\n\n')
-        return #paragraph_blocks
-
+        return
     # def get_resume_score(self):
     #     """Calculate Similarity betwen resume and job description"""
         
@@ -276,7 +367,6 @@ class ExtractData:
     #         job_embeddings = self.model.encode(self.job_description, convert_to_numpy=True, normalize_embeddings=True)
     #         resume_embeddings = self.model.encode(self.text, convert_to_numpy=True, normalize_embeddings=True)
     #         similarity = dot(job_embeddings, resume_embeddings)
-    #         print(similarity)
     #     except: 
     #         self.get_resume_score()
         
@@ -316,7 +406,8 @@ class ExtractData:
         return image
 
     def strip_text_with_nlp(self):
-        doc = self.nlp(u"{}".format(self.text))
+        # doc = self.nlp(u"{}".format(self.text))
+        doc = ResumeParser.custom_nlp(u"{}".format(self.text))
 
         return
 
@@ -324,17 +415,14 @@ class ExtractData:
         """ Detects entities in the text """
         entities = {}
 
-        doc = self.nlp(u"{}".format(self.text))
+        # doc = self.nlp(u"{}".format(self.text))
+        doc = ResumeParser.custom_nlp(u"{}".format(self.text))
         for ents in doc.ents:
-            # print(f"{ents.text:50}{ents.label_:10}{spacy.explain(ents.label_)}")
             if ents.label_ not in entities.keys():
                 entities[ents.label_] = []
                 entities[ents.label_].append(ents)
             else:
                 entities[ents.label_].append(ents)
-        # print(entities)
-        # print(len(entities['SKILL']))
-        # print(*[f"'{key}' : {item}" for key, item in entities.items()], sep='\n')
         
         return entities
 
@@ -357,8 +445,8 @@ class ExtractData:
 
         # > Extract data from resume
         resume_data = ResumeParser(resume=self.temp_path).get_extracted_data()
-        # print(resume_data)
-        print("resume_data")
+        # resume_data = ResumeParser.__init__
+        print(resume_data)
 
         # > Clean up the temp file
         # os.remove(self.temp_path)
@@ -369,13 +457,11 @@ class ExtractData:
 
         # > if the number of pages in a resume is more than 3
         if resume_data['no_of_pages'] == 0 or resume_data['no_of_pages'] > 3:
-            print("The maximum number of pages exeeded.")
             return
 
         # > Score
         if data_1 != None:
             self.resume_information['score'] = data_1[list(data_1.keys())[-2]]
-            print(f"====\nscore = {self.resume_information['score']} \n=======")
 
         # > Interview Questions
         if data_1 != None:
@@ -404,8 +490,6 @@ class ExtractData:
             if resume_data['name'] == entities['PERSON'][0].text:
                 self.resume_information['name'] = resume_data['name']
         else:
-            # self.resume_information['name'] = "John Doe"
-            # self.resume_information['name'] = data[list(data.keys())[0]]['name']
             try:
                 self.resume_information['name'] = data_2[list(data_2.keys())[0]]['name']
             except :
@@ -422,7 +506,6 @@ class ExtractData:
         # > Find the Links
         Links = self.find_links()
         self.resume_information['links'] = Links
-        # print(Links)
 
         # > Email
         if 'email' in Links.keys():
@@ -490,15 +573,12 @@ class ExtractData:
 
         # > Extract data from resume
         job_data = ResumeParser(resume=file_name).get_extracted_data()
-        # print(job_data)
-        # print("resume_data")
 
         # > Delete job_description.pdf
         # os.remove(file_name)
 
         # > if the number of pages in a resume is more than 3
         if job_data['no_of_pages'] == 0 or job_data['no_of_pages'] > 3:
-            print("The maximum number of pages exeeded.")
             return
         
         # > Skills 
@@ -517,7 +597,7 @@ class ExtractData:
         page = doc.new_page()
 
         # > Define where to place the text (x, y), font size, etc.
-        position = pymupdf.Point(72, 72)  # 1 inch from top-left (72 points = 1 inch)
+        position = pymupdf.Point(72, 72) 
         page.insert_text(position, text, fontsize=12)
 
         # > Save to file
@@ -566,12 +646,9 @@ class ExtractData:
             parsed_resume_1 = chat_completion.choices[0].message.content
 
             try:
-                # data = json.loads(parsed_resume_1)
                 data_1 = json5.loads(parsed_resume_1)
-                print(data_1)
                 break
             except :
-                print("moh")
                 pass
 
         while True:
@@ -661,16 +738,9 @@ class ExtractData:
             parsed_resume_2 = chat_completion.choices[0].message.content
 
             try:
-                print(parsed_resume_2)
-                print("=========================================================")
-                # data = json.loads(parsed_resume_2)
                 data_2 = json5.loads(parsed_resume_2)
-                # print(data)
-                # for x in data.items():
-                #     print(x, end="\n\n")
                 break
             except :
-                print("lahou")
                 pass
 
         return data_1, data_2
@@ -753,22 +823,4 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
     
     job_title = "Data Engineer"
 
-    # obj = ExtractData("Resume.pdf", job_description, job_title)
-    obj = ExtractData("Resume.pdf", job_description, job_title)
-    # obj = ExtractData("Amine_Resume.pdf", job_description, job_title)
-    obj.extract_text()
-    # obj.get_resume_data()
-    # obj.get_job_data()
-    obj.get_chatbot_data_one_resume()
-    # obj.get_resume_score()
-    # print(obj.text)
-    # print(obj.find_links())
-    # obj.divide_paragraphs()
-    # print(list(obj.text_paragraphs.keys()))
-    # obj.paragraphs_font_size()
-
-
     
-
-
-

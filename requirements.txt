@@ -15,10 +15,11 @@ pymupdf==1.25.5
 
 # External APIs / tools
 groq==0.22.0
-requests==2.32.3  # if you make HTTP requests
+requests==2.32.3
 
 # Large English spaCy model
 https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl
+
 
 
 

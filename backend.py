@@ -136,7 +136,7 @@ class ResumeParser(object):
                                             self.__resume
                                         )
         return
-    def extract_name(nlp_text, matcher):
+    def extract_name(self, nlp_text, matcher):
         '''
         Helper function to extract name from spacy nlp text
 
@@ -847,6 +847,7 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+
 
 
 

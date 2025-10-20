@@ -148,8 +148,8 @@ class ResumeParser(object):
         pattern = [cs.NAME_PATTERN]
 
         # matcher.add('NAME', None, *pattern)
-        # matcher.add('NAME', [p for p in pattern])
-        matcher.add('NAME', pattern=pattern)
+        matcher.add('NAME', [p for p in pattern])
+        # matcher.add('NAME', pattern=pattern)
 
         matches = matcher(nlp_text)
 
@@ -847,6 +847,7 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+
 
 
 

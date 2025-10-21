@@ -10,21 +10,23 @@ class database:
     def __init__(self):
 
         conn, cursor = self.initialize_database()
-        # try:
-        #     cursor.execute("""SELECT * FROM Clients""")
-        # except:
-        #     self.create_tables()
-
-        cursor.execute("""
-            SELECT EXISTS (
-                SELECT FROM information_schema.tables 
-                WHERE table_name = 'Clients'
-            );
-        """)
-        exists = cursor.fetchone()[0]
-        if not exists:
+        try:
+            cursor.execute("""SELECT * FROM Clients""")
+        except:
             self.create_tables()
+
         conn.close()
+        
+        # cursor.execute("""
+        #     SELECT EXISTS (
+        #         SELECT FROM information_schema.tables 
+        #         WHERE table_name = 'Clients'
+        #     );
+        # """)
+        # exists = cursor.fetchone()[0]
+        # if not exists:
+        #     self.create_tables()
+        # conn.close()
         pass
 
     def initialize_database(self):
@@ -446,5 +448,6 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 

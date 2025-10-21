@@ -1,15 +1,37 @@
 import sqlite3
+import psycopg2
+import psycopg2.extras
 import random
 import uuid
 from datetime import datetime
 
 class database:
     def __init__(self):
+
+        conn, cursor = self.initialize_database()
+        # try:
+        #     cursor.execute("""SELECT * FROM Clients""")
+        # except:
+        #     self.create_tables()
+
+        cursor.execute("""
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables 
+                WHERE table_name = 'Clients'
+            );
+        """)
+        exists = cursor.fetchone()[0]
+        if not exists:
+            self.create_tables()
+        conn.close()
         pass
 
     def initialize_database(self):
-        conn = sqlite3.connect("database.db")
-        cursor = conn.cursor()
+        # conn = sqlite3.connect("database.db")
+        # cursor = conn.cursor()
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+        conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         return conn, cursor
     
     def create_tables(self):
@@ -392,15 +414,19 @@ class database:
         return
 
     def get_date(self):
-        conn = sqlite3.connect(":memory:")
-        cursor = conn.cursor()
-
-        cursor.execute("SELECT date('now');")
+        conn, cursor = self.initialize_database()
+        cursor.execute("SELECT CURRENT_DATE;")
         current_date = cursor.fetchone()[0]
-
-        # print("Current date from SQLite:", current_date)
-
+        
         conn.close()
+        
+        # conn = sqlite3.connect(":memory:")
+        # cursor = conn.cursor()
+
+        # cursor.execute("SELECT date('now');")
+        # current_date = cursor.fetchone()[0]
+
+        # conn.close()
         return current_date
     
 
@@ -419,3 +445,4 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+

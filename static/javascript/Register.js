@@ -112,7 +112,7 @@ submit_button.addEventListener('click', function(e) {
                 body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                                     <span>
                                                         <h2>Error!</h2>
-                                                        <p>${error.text}. Try again.</p>
+                                                        <p>Try again Later.</p>
                                                         <div>
                                                             <button>Ok</button>
                                                         </div>
@@ -130,10 +130,11 @@ submit_button.addEventListener('click', function(e) {
 
             window.location.href = "/Verify_email"
         }
-        else if ( data.response == 'valid' || data.response == "exist, unverified" )
+        else if ( data.response == "exist, unverified" )
         {
             console.log(data.response)
-            window.location.href = "/login"
+            window.location.href = "/Verify_email"
+            // window.location.href = "/login"
         }
     
     })

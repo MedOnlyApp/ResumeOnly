@@ -335,10 +335,11 @@ class database:
     def get_client_applications(client_id:str):
         db = database()
         conn, cursor = db.initialize_database()
+        cursor_2 = conn.cursor()
 
-        cursor.execute(f"""SELECT applications_id, job_title, resume_name, score, date FROM Applications
+        cursor_2.execute(f"""SELECT applications_id, job_title, resume_name, score, date FROM Applications
                         WHERE client_id = %s""", (client_id,))
-        applications = cursor.fetchall()
+        applications = cursor_2.fetchall()
 
         conn.close()
         return applications
@@ -350,7 +351,7 @@ class database:
 
         cursor.execute(f"""SELECT client_name, username, bio, image FROM Clients
                         WHERE client_id = %s""", (client_id,))
-        profile_info = cursor.fetchall()
+        profile_info = cursor.fetchone()
 
         conn.close()
         return profile_info
@@ -425,6 +426,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

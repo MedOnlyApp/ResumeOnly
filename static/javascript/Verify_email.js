@@ -80,9 +80,6 @@ verification_Form.addEventListener('submit', function(e) {
 
             });
 
-            setTimeout(() => {
-                window.location.href = "/Verify_email"
-            }, 10000)
         }
         else if ( data.response == 'unvalid' )
         {
@@ -99,4 +96,5 @@ verification_Form.addEventListener('submit', function(e) {
         // addMessage('system', 'Sorry, there was an error processing your question. Please try again.');
     });
 });
+
 

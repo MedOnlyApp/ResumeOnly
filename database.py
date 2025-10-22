@@ -133,9 +133,9 @@ class database:
             return "valid"
         elif len(user) == 1:
             if user[0]["verified"] == 0:
-                if password == user[0]["password"]:
+                if password != user[0]["password"]:
                     db.update_user_password(email, password)
-                return "unverified"
+                return "exists, unverified"
             else:
                 return "verified"
 
@@ -429,6 +429,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

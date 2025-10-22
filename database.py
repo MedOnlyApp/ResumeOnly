@@ -89,9 +89,9 @@ class database:
         print("login :", user)
         if len(user) == 0:
             return "user not found"
-        elif user[0][1] != password:
+        elif user[0]["password"] != password:
             return "password incorrect"
-        elif user[0][-1] == 0:
+        elif user[0]["verified"] == 0:
             return "unverified"
         else:
             # return "valid"
@@ -132,8 +132,8 @@ class database:
         if len(user) == 0:
             return "valid"
         elif len(user) == 1:
-            if user[0][-1] == 0:
-                if password == user[0][5]:
+            if user[0]["verified"] == 0:
+                if password == user[0]["password"]:
                     db.update_user_password(email, password)
                 return "unverified"
             else:
@@ -152,8 +152,8 @@ class database:
         conn.close()
 
         print("registration code :", user)
-        if user[0][-2] == verification_code:
-            db_time_str = user[0][-3]
+        if user[0]["verification_code"] == verification_code:
+            db_time_str = user[0]["date"]
             # > Convert string to datetime object
             db_time = datetime.strptime(db_time_str, "%Y-%m-%d %H:%M:%S")
             now = datetime.now()
@@ -317,7 +317,7 @@ class database:
         application = cursor.fetchone()
 
         conn.close()
-        return application[0]
+        return application
 
     @staticmethod
     def get_portfolio(username:str):
@@ -329,7 +329,7 @@ class database:
         application = cursor.fetchone()
 
         conn.close()
-        return application[0]
+        return application
 
     @staticmethod
     def get_client_applications(client_id:str):
@@ -425,6 +425,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

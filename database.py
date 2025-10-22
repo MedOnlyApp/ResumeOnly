@@ -97,6 +97,7 @@ class database:
         user = cursor.fetchall()
         conn.close()
 
+        print("login :", user)
         if len(user) == 0:
             return "user not found"
         elif user[0][1] != password:
@@ -118,6 +119,7 @@ class database:
         user = cursor.fetchall()
         conn.close()
 
+        print("username :", user)
         if len(user) == 0:
             return "valid"
         else:
@@ -134,10 +136,10 @@ class database:
                             WHERE email=%s""", (email,))
         user = cursor.fetchall()
         conn.close()
-
+        
         # print(user)
         # print(len(user))
-
+        print("Registration :", user)
         if len(user) == 0:
             return "valid"
         elif len(user) == 1:
@@ -160,6 +162,7 @@ class database:
         user = cursor.fetchall()
         conn.close()
 
+        print("registration code :", user)
         if user[0][-2] == verification_code:
             db_time_str = user[0][-3]
             # > Convert string to datetime object
@@ -433,6 +436,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

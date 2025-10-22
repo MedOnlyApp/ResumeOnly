@@ -144,7 +144,7 @@ submit_button.addEventListener('click', function(e) {
         body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                             <span>
                                                 <h2>Error!</h2>
-                                                <p>${error}. Try again.</p>
+                                                <p>Try again Later.</p>
                                                 <div>
                                                     <button>Ok</button>
                                                 </div>
@@ -161,3 +161,4 @@ submit_button.addEventListener('click', function(e) {
 
     });
 });
+

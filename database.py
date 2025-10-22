@@ -95,7 +95,7 @@ class database:
             return "unverified"
         else:
             # return "valid"
-            return user[0][0]
+            return user[0]["id"]
 
     @staticmethod
     def check_portfolio_name(username:str):
@@ -153,7 +153,7 @@ class database:
 
         print("registration code :", user)
         if user[0]["verification_code"] == verification_code:
-            db_time_str = user[0]["date"]
+            db_time_str = str(user[0]["date"])
             # > Convert string to datetime object
             db_time = datetime.strptime(db_time_str, "%Y-%m-%d %H:%M:%S")
             now = datetime.now()
@@ -426,6 +426,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

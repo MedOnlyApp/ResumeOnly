@@ -292,7 +292,7 @@ class database:
 
         cursor.execute(f"""UPDATE Clients
                         SET verified = %s
-                        WHERE email = %s""", (TRUE, email))
+                        WHERE email = %s""", (True, email))
         conn.commit()
         conn.close()
         return
@@ -429,6 +429,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

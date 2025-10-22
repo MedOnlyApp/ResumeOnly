@@ -121,7 +121,8 @@ def Verification():
     
     response = database.check_verification_code(email, verification_code, new_verification_code)
     return jsonify({
-        'response': response
+        'response': response,
+        'verification_code': new_verification_code
     })
 
 @app.route('/main_page')
@@ -346,4 +347,5 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
 
 # (1, '88ebe9b0-9f1b-4dbd-9c54-859cb04f9ac5', 'MedOnly', 'mohamed.rouane.23@ump.ac.ma', 'new')
+
 

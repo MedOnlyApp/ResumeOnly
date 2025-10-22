@@ -898,7 +898,7 @@ fetch(API_URL, {
                     body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                                         <span>
                                                             <h2>Error!</h2>
-                                                            <p>${error.message}. Try again.</p>
+                                                            <p>$Try again Later.</p>
                                                             <div>
                                                                 <button>Ok</button>
                                                             </div>
@@ -924,7 +924,7 @@ fetch(API_URL, {
             body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                                 <span>
                                                     <h2>Error!</h2>
-                                                    <p>${error.message}. Try again.</p>
+                                                    <p>Try again Later.</p>
                                                     <div>
                                                         <button>Ok</button>
                                                     </div>
@@ -953,7 +953,7 @@ fetch(API_URL, {
     body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                         <span>
                                             <h2>Error!</h2>
-                                            <p>${error.message}. Try again.</p>
+                                            <p>$Try again Later.</p>
                                             <div>
                                                 <button>Ok</button>
                                             </div>
@@ -967,6 +967,7 @@ fetch(API_URL, {
         window.location.href = "/analyse_resume"
     })
 });
+
 
 
 

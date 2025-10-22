@@ -32,7 +32,7 @@ def index():
 def portfolio_site(username):
     # Here you can query a database or dictionary to fetch user portfolio data
     # Example: return a portfolio page with the given username
-    portfolio = database.get_portfolio(username)
+    portfolio = database.get_portfolio(username)["portfolio"]
     print(portfolio)
     return render_template("portfolio_site.html", username=username, portfolio=portfolio)
 
@@ -230,7 +230,7 @@ def get_portfolio_info():
     # email = data.get("email", '')
 
     # resume_data = database.get_application(session.get("user_id"), session.get("application_id"))
-    resume_data = json5.loads(database.get_application(session.get("user_id"), session.get("application_id")))
+    resume_data = json5.loads(database.get_application(session.get("user_id"), session.get("application_id"))["resume_info"])
     print(resume_data)
     return jsonify({
         "resume_data": resume_data
@@ -275,11 +275,11 @@ def load_account_info():
     user_id=session.get('user_id')
     print("user_ID  = ",user_id)
     applications = database.get_client_applications(client_id=user_id)
-    profile_info = list(database.get_client_profile_info(client_id=user_id)[0])
+    profile_info = list(database.get_client_profile_info(client_id=user_id))
     print("profile_info :", profile_info)
-    if profile_info[-1] != None:
-        if isinstance(profile_info[-1], bytes):
-            profile_info[-1] = base64.b64encode(profile_info[-1]).decode('utf-8')
+    if profile_info["image"] != None:
+        if isinstance(profile_info["image"], bytes):
+            profile_info["image"] = base64.b64encode(profile_info["image"]).decode('utf-8')
 
     return jsonify({
         "applications": applications,
@@ -346,3 +346,4 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
 
 # (1, '88ebe9b0-9f1b-4dbd-9c54-859cb04f9ac5', 'MedOnly', 'mohamed.rouane.23@ump.ac.ma', 'new')
+

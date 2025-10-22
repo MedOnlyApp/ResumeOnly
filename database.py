@@ -81,7 +81,7 @@ class database:
         db = database()
         conn, cursor = db.initialize_database()
 
-        cursor.execute(f"""SELECT client_id, password FROM Clients
+        cursor.execute(f"""SELECT client_id, password, verified FROM Clients
                             WHERE email=%s""", (email,))
         user = cursor.fetchall()
         conn.close()
@@ -429,6 +429,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

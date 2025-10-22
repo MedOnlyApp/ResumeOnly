@@ -4,6 +4,7 @@ const error_message = document.getElementById("error_message")
 const verification_Form = document.getElementById("verification_form")
 const submit_button = document.getElementById("submit_button")
 
+const emailjs = window.emailjs;
 
 submit_button.addEventListener("click", () => {
     error_message.style.display = "none"
@@ -51,6 +52,37 @@ verification_Form.addEventListener('submit', function(e) {
         {
             error_message.style.display = "inline"
             error_message.innerHTML = "This code is expired, check your email for a new code."
+            
+            emailjs.send("service_a17lfxf","template_wn7vzdh",{
+                message: data.verification_code
+            }, "A1mKi6_6NZGOXeTfV")
+            .then((result) => {
+                console.log("Email sent successfully!", result.text);
+            }, (error) => {
+                console.log("Failed to send email:", error.text);
+                const body = document.querySelector("body")
+                body.insertAdjacentHTML("beforeend", `<div class="error-panel">
+                                                    <span>
+                                                        <h2>Error!</h2>
+                                                        <p>Try again Later.</p>
+                                                        <div>
+                                                            <button>Ok</button>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                        `)
+                const error_panel = document.querySelector(".error-panel")
+
+                error_panel.firstElementChild.lastElementChild.firstElementChild.addEventListener("click", () => {
+                    error_panel.remove()
+                    window.location.href = "/main_page"
+                })
+
+            });
+
+            setTimeout(() => {
+                window.location.href = "/Verify_email"
+            }, 10000)
         }
         else if ( data.response == 'unvalid' )
         {
@@ -67,3 +99,4 @@ verification_Form.addEventListener('submit', function(e) {
         // addMessage('system', 'Sorry, there was an error processing your question. Please try again.');
     });
 });
+

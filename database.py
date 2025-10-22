@@ -41,15 +41,15 @@ class database:
         conn, cursor = self.initialize_database()
 
         sql_for_clients = """CREATE TABLE Clients(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             client_id TEXT NOT NULL,
             client_name TEXT NOT NULL,
             username TEXT NOT NULL,
             email TEXT NOT NULL,
             password TEXT NOT NULL,
             bio TEXT,
-            image BLOB,
-            date DATETIME,
+            image BYTEA,
+            date TIMESTAMP,
             verification_code TEXT,
             verified BOOLEAN
             )"""
@@ -57,13 +57,13 @@ class database:
         cursor.execute(sql_for_clients)
 
         sql_for_applications = """CREATE TABLE Applications(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             client_id TEXT NOT NULL,
             applications_id TEXT NOT NULL,
             date TEXT NOT NULL,
             job_title TEXT NOT NULL,
             resume_name TEXT NOT NULL,
-            resume_file BLOB NOT NULL,
+            resume_file BYTEA NOT NULL,
             resume_text TEXT NOT NULL,
             job_desctiption TEXT NOT NULL,
             score INTEGER NOT NULL,
@@ -73,7 +73,7 @@ class database:
         cursor.execute(sql_for_applications)
 
         sql_for_portfolios = """CREATE TABLE Portfolio(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             client_id TEXT NOT NULL,
             username TEXT,
             portfolio TEXT,
@@ -93,7 +93,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT client_id, password FROM Clients
-                            WHERE email='{email}'""")
+                            WHERE email=%s""", (email,))
         user = cursor.fetchall()
         conn.close()
 
@@ -114,7 +114,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT * FROM Portfolio
-                            WHERE username='{username}'""")
+                            WHERE username=%s""", (username,))
         user = cursor.fetchall()
         conn.close()
 
@@ -131,7 +131,7 @@ class database:
 
         # cursor.execute(f"""SELECT COUNT(*) FROM Clients
         cursor.execute(f"""SELECT * FROM Clients
-                            WHERE email='{email}'""")
+                            WHERE email=%s""", (email,))
         user = cursor.fetchall()
         conn.close()
 
@@ -156,17 +156,17 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT * FROM Clients
-                            WHERE email='{email}'""")
+                            WHERE email=%s""", (email,))
         user = cursor.fetchall()
         conn.close()
 
         if user[0][-2] == verification_code:
             db_time_str = user[0][-3]
-            # Convert string to datetime object
+            # > Convert string to datetime object
             db_time = datetime.strptime(db_time_str, "%Y-%m-%d %H:%M:%S")
             now = datetime.now()
             time_diff = db_time - now
-            # Compare
+            # > Compare
             if time_diff.total_seconds() > 3 * 3600:
                 db.update_verification_code_and_date(email, new_verification_code)
                 return "expired"
@@ -184,7 +184,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute("""INSERT INTO Clients(client_id, client_name, username, email, password, bio, image, date, verification_code, verified)
-                        VALUES(?, ?, ?, ?, ?, ?, ?, DATETIME('now'), ?, 0)""", (client_id, client_name, username, email, password, bio, image, verification_code))
+                        VALUES(%s, %s, %s, %s, %s, %s, %s, NOW(), %s, FALSE)""", (client_id, client_name, username, email, password, bio, image, verification_code))
         conn.commit()
         conn.close()
         return
@@ -197,8 +197,8 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute("""UPDATE Clients
-                        SET image = ?
-                        WHERE client_id = ?""", (image, client_id))
+                        SET image = %s
+                        WHERE client_id = %s""", (image, client_id))
         conn.commit()
         conn.close()
         return
@@ -234,7 +234,7 @@ class database:
                         score,
                         resume_info
                         )
-                       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", 
+                       VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
                        (client_id, 
                         applications_id,
                         date,
@@ -260,19 +260,8 @@ class database:
 
         date = db.get_date()
 
-        cursor.execute("""INSERT INTO Portfolio(
-                        client_id,
-                        username,
-                        portfolio,
-                        date
-                        )
-                       VALUES(?, ?, ?, ?)""", 
-                       (client_id, 
-                        username,
-                        portfolio,
-                        date
-                        )
-                )
+        cursor.execute("""INSERT INTO Portfolio(client_id, username, portfolio, date)
+                       VALUES(%s, %s, %s, %s)""", (client_id, username, portfolio, date))
         conn.commit()
         conn.close()
         return
@@ -283,8 +272,8 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""UPDATE Clients
-                        SET password = '{new_password}'
-                        WHERE email = '{email}'""")
+                        SET password = %s
+                        WHERE email = %s""", (new_password, email))
         conn.commit()
         conn.close()
         return
@@ -295,8 +284,8 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""UPDATE Clients
-                        SET verification_code = '{new_verification_code}' AND date = 'DATETIME("now")'
-                        WHERE email = '{email}'""")
+                        SET verification_code = %s AND date = %s
+                        WHERE email = %s""", (new_verification_code, NOW(), email))
         conn.commit()
         conn.close()
         return
@@ -307,8 +296,8 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""UPDATE Clients
-                        SET verified = '1'
-                        WHERE email = '{email}'""")
+                        SET verified = %s
+                        WHERE email = %s""", (TRUE, email))
         conn.commit()
         conn.close()
         return
@@ -319,8 +308,8 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""UPDATE Clients
-                        SET client_name = ?, bio = ?
-                        WHERE client_id = ?
+                        SET client_name = %s, bio = %s
+                        WHERE client_id = %s
                         """, (client_name, bio, client_id))
         conn.commit()
         conn.close()
@@ -332,8 +321,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT resume_info FROM Applications
-                        WHERE client_id = "{client_id}" AND applications_id = "{application_id}"
-                       """)
+                        WHERE client_id = %s AND applications_id = %s""", (client_id, application_id))
         application = cursor.fetchone()
 
         conn.close()
@@ -345,8 +333,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT portfolio FROM Portfolio
-                        WHERE username = "{username}"
-                       """)
+                        WHERE username = %s""", (username,))
         application = cursor.fetchone()
 
         conn.close()
@@ -358,8 +345,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT applications_id, job_title, resume_name, score, date FROM Applications
-                        WHERE client_id = "{client_id}"
-                       """)
+                        WHERE client_id = %s""", (client_id,))
         applications = cursor.fetchall()
 
         conn.close()
@@ -371,8 +357,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""SELECT client_name, username, bio, image FROM Clients
-                        WHERE client_id = ?
-                       """, (client_id,))
+                        WHERE client_id = %s""", (client_id,))
         profile_info = cursor.fetchall()
 
         conn.close()
@@ -384,7 +369,7 @@ class database:
         conn, cursor = db.initialize_database()
 
         cursor.execute(f"""DELETE FROM Applications
-                        WHERE client_id=? AND applications_id = ?
+                        WHERE client_id = %s AND applications_id = %s
                         """, (client_id, application_id))
         conn.commit()
         conn.close()
@@ -394,7 +379,7 @@ class database:
         conn, cursor = self.initialize_database()
 
         cursor.execute(f"""DELETE FROM Clients
-                        WHERE email='{email}'""")
+                        WHERE email = %s""", (email,))
 
         conn.commit()
         conn.close()
@@ -448,6 +433,7 @@ if __name__ == "__main__":
     # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
     # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
     # db.read_applicants()
+
 
 
 

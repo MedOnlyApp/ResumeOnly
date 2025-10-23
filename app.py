@@ -280,8 +280,9 @@ def load_account_info():
     profile_info = database.get_client_profile_info(client_id=user_id)
     print("profile_info :", profile_info)
     if profile_info["image"] != None:
-        if isinstance(profile_info["image"], bytes):
-            profile_info["image"] = base64.b64encode(profile_info["image"]).decode('utf-8')
+        # if isinstance(profile_info["image"], bytes):
+        image_bytes = bytes(profile_info["image"])
+        profile_info["image"] = base64.b64encode(image_bytes).decode('utf-8')
 
     return jsonify({
         "applications": applications,
@@ -348,6 +349,7 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
 
 # (1, '88ebe9b0-9f1b-4dbd-9c54-859cb04f9ac5', 'MedOnly', 'mohamed.rouane.23@ump.ac.ma', 'new')
+
 
 
 

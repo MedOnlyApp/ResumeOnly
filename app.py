@@ -276,7 +276,8 @@ def load_account_info():
     user_id=session.get('user_id')
     print("user_ID  = ",user_id)
     applications = database.get_client_applications(client_id=user_id)
-    profile_info = list(database.get_client_profile_info(client_id=user_id))
+    # profile_info = list(database.get_client_profile_info(client_id=user_id))
+    profile_info = database.get_client_profile_info(client_id=user_id)
     print("profile_info :", profile_info)
     if profile_info["image"] != None:
         if isinstance(profile_info["image"], bytes):
@@ -347,5 +348,6 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
 
 # (1, '88ebe9b0-9f1b-4dbd-9c54-859cb04f9ac5', 'MedOnly', 'mohamed.rouane.23@ump.ac.ma', 'new')
+
 
 

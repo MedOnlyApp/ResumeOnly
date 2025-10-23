@@ -163,11 +163,11 @@ fetch('/load_account_info', {
 .then(data => {
     console.log(data)
 
-    saved_info_div.children[0].innerHTML = data.profile_info[0]
-    saved_info_div.children[1].innerHTML = data.profile_info[1]
-    saved_info_div.children[2].innerHTML = data.profile_info[2]
-    if (data.profile_info[3] != null) 
-        profile_image_div.children[0].children[0].src = `data:image/jpeg};base64,${data.profile_info[3]}`
+    saved_info_div.children[0].innerHTML = data.profile_info["client_name"]
+    saved_info_div.children[1].innerHTML = data.profile_info["username"]
+    saved_info_div.children[2].innerHTML = data.profile_info["bio"]
+    if (data.profile_info["image"] != null) 
+        profile_image_div.children[0].children[0].src = `data:image/jpeg};base64,${data.profile_info["image"]}`
     
     for ( let application of data.applications) {
         
@@ -267,6 +267,7 @@ fetch('/load_account_info', {
     })
 
 });
+
 
 
 

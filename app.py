@@ -185,8 +185,9 @@ def upload_resume():
                              )
     
     if resume_data["image"]["image"] != None:
-        if isinstance(resume_data["image"]["image"], bytes):
-            resume_data["image"]["image"] = base64.b64encode(resume_data["image"]["image"]).decode('utf-8')
+        # if isinstance(resume_data["image"]["image"], bytes):
+        image_bytes = bytes(resume_data["image"]["image"])
+        resume_data["image"]["image"] = base64.b64encode(image_bytes).decode('utf-8')
 
     return jsonify({
         'resume_data': resume_data,
@@ -349,6 +350,7 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
 
 # (1, '88ebe9b0-9f1b-4dbd-9c54-859cb04f9ac5', 'MedOnly', 'mohamed.rouane.23@ump.ac.ma', 'new')
+
 
 
 

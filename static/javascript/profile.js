@@ -32,10 +32,9 @@ profile_img_input.addEventListener('input', () => {
                 }
             })
             .then(data => {
-                console.log(data.response)
+                
             })
             .catch(error => {
-                console.error('Error:', error.message);
                 const body = document.querySelector("body")
                 body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                                     <span>
@@ -61,7 +60,6 @@ profile_img_input.addEventListener('input', () => {
             reader.onload = function (e) {
                 // Set the image source to the loaded file
                 profile_image_div.children[0].children[0].src = e.target.result
-                console.log(data.response)
             }
 
         reader.readAsDataURL(file)
@@ -99,14 +97,12 @@ save_button.addEventListener('click', () => {
         }
     })
     .then(data => {
-        console.log(data.response)
 
         saved_info_div.children[0].innerHTML = editing_panel.children[1].value
         saved_info_div.children[2].innerHTML = editing_panel.children[3].value
 
     })
     .catch(error => {
-        console.error('Error:', error.message);
         const body = document.querySelector("body")
         body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                             <span>
@@ -161,7 +157,6 @@ fetch('/load_account_info', {
     }
 })
 .then(data => {
-    console.log(data)
 
     saved_info_div.children[0].innerHTML = data.profile_info["client_name"]
     saved_info_div.children[1].innerHTML = data.profile_info["username"]
@@ -185,22 +180,6 @@ fetch('/load_account_info', {
                                 </td>
                             </tr>
                             `
-
-        // history_div.children[0].innerHTML += `
-        //                     <tr>
-        //                         <td>${application[0]}</td>
-        //                         <td>${application[1]}</td>
-        //                         <td>${application[2]}</td>
-        //                         <td>${application[3]}</td>
-        //                         <td>${application[4]}</td>
-        //                         <td class="modification_colomn">
-        //                             <span class="delete_span">
-        //                                 <img src="../static/img/delete.svg" alt="">
-        //                                 Delete
-        //                             </span>
-        //                         </td>
-        //                     </tr>
-        //                     `
     }
 
     const delete_buttons = document.querySelectorAll('.delete_span')
@@ -211,7 +190,6 @@ fetch('/load_account_info', {
 
     delete_buttons.forEach(button => {
         button.addEventListener('click', (e) => {
-            console.log("Delete button clicked!", button);
             
                 
             fetch('/load_account_info/delete_application', {
@@ -234,12 +212,11 @@ fetch('/load_account_info', {
                 }    
             })    
             .then(data => {
-                console.log(data)
                 // window.location.href = "/account"
                 button.parentElement.parentElement.remove()
             })    
             .catch(error => {
-                console.error('Error:', error.message);
+                
             });    
             
         });    
@@ -247,7 +224,6 @@ fetch('/load_account_info', {
 
 })
 .catch(error => {
-    console.error('Error:', error.message);
     const body = document.querySelector("body")
     body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                         <span>
@@ -267,6 +243,7 @@ fetch('/load_account_info', {
     })
 
 });
+
 
 
 

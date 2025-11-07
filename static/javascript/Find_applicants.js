@@ -39,14 +39,12 @@ verification_Form.addEventListener('submit', function(e) {
         if ( data.response == 'password_error' )
         {
             error_passwords_match.style.display = 'inline'
-            console.log(data.response)
         }
         else if ( data.response == 'exist' )
         {
             error_message.style.display = "inline"
             username_input.value = ''
             username_input.blur()
-            console.log(data.response)
         }
         else if ( data.response == 'valid' )
         {
@@ -55,7 +53,6 @@ verification_Form.addEventListener('submit', function(e) {
     
     })
     .catch(error => {
-        console.error('Error:', error);
         
         const body = document.querySelector("body")
         body.insertAdjacentHTML("beforeend", `<div class="error-panel">
@@ -76,3 +73,4 @@ verification_Form.addEventListener('submit', function(e) {
         })
     });
 });
+

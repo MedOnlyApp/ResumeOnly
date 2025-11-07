@@ -1,9 +1,5 @@
 
 const userInfo = document.getElementById("user-info");
-// const user_id = userInfo.dataset.user_id;  
-// const application_id = userInfo.dataset.application_id;  
-
-// console.log(user_id, application_id);
 
 
 const publish_porfolio = document.getElementById("publish-portfolio")
@@ -54,7 +50,6 @@ input.addEventListener("keydown", (e) => {
 function close_icon_element(element) {
     element.addEventListener("click", () => {
 
-        console.log(element.parentElement.id)
         if ( element.parentElement.id == "about_id" )
         {
             const header_links = document.querySelector(".header-menu").querySelectorAll("li")
@@ -222,14 +217,11 @@ fetch(API_URL, {
     }
 })
 .then(data => {
-    console.log(data)
 
     // > Remove the loader
     const section_element = document.querySelector("section")
     
     section_element.firstElementChild.firstElementChild.remove()
-
-    console.log('Removed the loader')
     
     // > Add The portfolio html
     section_element.firstElementChild.style.display = "block"
@@ -355,7 +347,6 @@ fetch(API_URL, {
                     </div>
                 </footer>
                 `)
-    console.log('Add The portfolio html')
     
 
     const name_title = document.querySelectorAll(".name_title")
@@ -371,7 +362,6 @@ fetch(API_URL, {
     name_title.forEach((element) => {
         element.innerHTML = data.resume_data["name"].split(" ")[1]
     })
-    console.log('Website Name')
 
     // > About
 
@@ -390,8 +380,6 @@ fetch(API_URL, {
     about_id.children[1].lastElementChild.lastElementChild.firstElementChild.firstElementChild.firstElementChild.innerHTML = `${Object.keys(data.resume_data["paragraphs"]["projects"]).length}+`
     about_id.children[1].lastElementChild.lastElementChild.children[1].firstElementChild.firstElementChild.innerHTML = `${Object.keys(data.resume_data["paragraphs"]["experiences"]).length}+`
     about_id.children[1].lastElementChild.lastElementChild.lastElementChild.firstElementChild.firstElementChild.innerHTML = `${data.resume_data["skills"].length}+`
-    
-    console.log('about')
 
     // > Projects
     if ( data.resume_data["paragraphs"] != null )
@@ -426,8 +414,6 @@ fetch(API_URL, {
 
         }
 
-    console.log('project')
-
     // > Skills
 
     if ( data.resume_data["skill_categories"] != null ) {
@@ -451,14 +437,11 @@ fetch(API_URL, {
         }
     }
 
-    console.log('skills')
-
     // > Experiences
 
     if ( data.resume_data["paragraphs"] != null )
         if ( "experiences" in data.resume_data["paragraphs"] ) {
             experience_id.lastElementChild.insertAdjacentHTML("beforeend", `<span></span>`)
-            console.log("experience 1")
             for (const key in data.resume_data["paragraphs"]["experiences"]) {
                 experience_id.lastElementChild.insertAdjacentHTML("beforeend", `<div class="closable"><div></div></div>`)
                 
@@ -487,8 +470,6 @@ fetch(API_URL, {
 
         }
 
-    console.log('experience')
-
     // > Contact 
     
     if ( data.resume_data["email"] != null && ( data.resume_data["links"] == {} || data.resume_data["links"] == null ) )
@@ -516,8 +497,6 @@ fetch(API_URL, {
 
     }
 
-    console.log('contact')
-
     // > Contact 2
     
     if ( data.resume_data["email"] != null && data.resume_data["phone"] == null )
@@ -539,7 +518,6 @@ fetch(API_URL, {
         
     }
 
-    console.log('contact 2')
 
     // > Code for edit button
 
@@ -592,7 +570,6 @@ fetch(API_URL, {
                     const imgURL = URL.createObjectURL(file)
                     img_div.firstElementChild.src = imgURL
                 } catch (error) {
-                    console.error("Something went wrong:", error.message);
                 }
             }
         })
@@ -825,13 +802,11 @@ fetch(API_URL, {
             unedit_element(element)
         })
 
-        console.log("did you see this")
-
         try {
             const img_div = document.querySelector(".img_div")
             img_div.querySelector("input").remove()
         } catch (error) {
-            console.error("Something went wrong:", error.message);
+            
         }
         
     })
@@ -863,7 +838,7 @@ fetch(API_URL, {
 
             if ( data.response == "exist" )
             {
-                console.log("port/ exist")
+                
             }
             else {
                 fetch("/save_portfolio", {
@@ -889,11 +864,9 @@ fetch(API_URL, {
                     }
                 })
                 .then(data => {
-                    console.log("port/")
                     window.location.href = `/portfolio/${publish_porfolio.parentElement.firstElementChild.value.substring(25)}`
                 })
                 .catch(error => {
-                    console.error('Error:', error.message);
                     const body = document.querySelector("body")
                     body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                                         <span>
@@ -919,7 +892,6 @@ fetch(API_URL, {
 
         })
         .catch(error => {
-            console.error('Error:', error.message);
             const body = document.querySelector("body")
             body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                                 <span>
@@ -948,7 +920,6 @@ fetch(API_URL, {
 
 })
 .catch(error => {
-    console.error('Error:', error.message);
     const body = document.querySelector("body")
     body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                         <span>
@@ -967,6 +938,7 @@ fetch(API_URL, {
         window.location.href = "/analyse_resume"
     })
 });
+
 
 
 

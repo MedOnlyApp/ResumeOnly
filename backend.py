@@ -370,7 +370,6 @@ class ExtractData:
                         end_index += 1
                         if "bold" in span['font'].lower():
                             self.paragraphs_headers[header].append(span)
-                        # print(span)
                     
                 
                 if found_header == True and found_next_header == True:
@@ -378,21 +377,7 @@ class ExtractData:
         
             self.paragraph_blocks[header] += blocks[start_index:end_index]
         return
-    # def get_resume_score(self):
-    #     """Calculate Similarity betwen resume and job description"""
-        
-    #     # > Check if the similarity model is loaded
-    #     while self.similarity_model_loaded == False:
-    #         continue
-        
-    #     try:
-    #         job_embeddings = self.model.encode(self.job_description, convert_to_numpy=True, normalize_embeddings=True)
-    #         resume_embeddings = self.model.encode(self.text, convert_to_numpy=True, normalize_embeddings=True)
-    #         similarity = dot(job_embeddings, resume_embeddings)
-    #     except: 
-    #         self.get_resume_score()
-        
-    #     return similarity
+
 
     def binary_image_to_file(self, image:dict):
         """ Converts a binary image to a file """
@@ -467,8 +452,7 @@ class ExtractData:
 
         # > Extract data from resume
         resume_data = ResumeParser(resume=self.temp_path).get_extracted_data()
-        # resume_data = ResumeParser.__init__
-        print(resume_data)
+        
 
         # > Clean up the temp file
         # os.remove(self.temp_path)
@@ -847,6 +831,7 @@ Boston Consulting Group is an Equal Opportunity Employer. All qualified applican
 
 
     
+
 
 
 

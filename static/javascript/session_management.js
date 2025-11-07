@@ -1,7 +1,5 @@
 const user_id = document.getElementById("user-info").dataset.userId;
-console.log("Logged in as:" + user_id);
-console.log("type : " + typeof(user_id));
-console.log("user_id : " + user_id);
+
 
 if (user_id == "" || user_id == "{{ user_id }}" || user_id == "None")
 {
@@ -60,4 +58,5 @@ document.addEventListener('click', (e) => {
         // console.log('Clicked outside the element!');
     }
 });
+
 

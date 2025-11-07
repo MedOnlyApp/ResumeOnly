@@ -8,7 +8,6 @@ const error_message = document.getElementById("error_message")
 const register_Form = document.getElementById("registration_form")
 const submit_button = document.getElementById("submit_button")
 
-console.log("moh")
 // import emailjs from '@emailjs/browser';
 const emailjs = window.emailjs;
 
@@ -23,8 +22,7 @@ function is_password_strong(password) {
 
 
 submit_button.addEventListener('click', function(e) {
-    e.preventDefault();
-    console.log("moh")
+    e.preventDefault()
 
     error_message.style.display = "none"
     // error_passwords_match.style.display = 'none'
@@ -43,7 +41,6 @@ submit_button.addEventListener('click', function(e) {
         password_confirm_input.value = ''
         password_input.blur()
         password_confirm_input.blur()
-        console.log(data.response)
         
         return
     }
@@ -80,7 +77,6 @@ submit_button.addEventListener('click', function(e) {
             password_confirm_input.value = ''
             password_input.blur()
             password_confirm_input.blur()
-            console.log(data.response)
         }
         else if ( data.response == 'verified' )
         {
@@ -94,11 +90,9 @@ submit_button.addEventListener('click', function(e) {
             email_input.blur()
             password_input.blur()
             password_confirm_input.blur()
-            console.log(data.response)
         }
         else if ( data.response == 'unverified' )
         {
-            console.log(data.response)
 
             // > send verification email
             emailjs.send("service_a17lfxf","template_wn7vzdh",{
@@ -132,14 +126,12 @@ submit_button.addEventListener('click', function(e) {
         }
         else if ( data.response == "exist, unverified" )
         {
-            console.log(data.response)
             window.location.href = "/Verify_email"
             // window.location.href = "/login"
         }
     
     })
     .catch(error => {
-        console.error('Error:', error);
         const body = document.querySelector("body")
         body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                             <span>
@@ -161,4 +153,5 @@ submit_button.addEventListener('click', function(e) {
 
     });
 });
+
 

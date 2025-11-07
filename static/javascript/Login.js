@@ -46,7 +46,6 @@ login_Form.addEventListener('submit', function(e) {
     })
     .then(data => {
         
-        console.log(data.response)
         if ( data.response == 'password incorrect' || data.response == 'user not found' )
         {
             error_message.style.display = "inline"
@@ -66,7 +65,6 @@ login_Form.addEventListener('submit', function(e) {
             
     })
     .catch(error => {
-        console.error('Error:', error);
 
         const body = document.querySelector("body")
         body.insertAdjacentHTML("beforeend", `<div class="error-panel">
@@ -88,6 +86,7 @@ login_Form.addEventListener('submit', function(e) {
 
     });
 });
+
 
 
 

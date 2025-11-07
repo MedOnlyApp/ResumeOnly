@@ -93,7 +93,6 @@ class database:
         elif user[0]["verified"] == 0:
             return "unverified"
         else:
-            # return "valid"
             return user[0]["client_id"]
 
     @staticmethod
@@ -118,7 +117,6 @@ class database:
         db = database()
         conn, cursor = db.initialize_database()
 
-        # cursor.execute(f"""SELECT COUNT(*) FROM Clients
         cursor.execute(f"""SELECT * FROM Clients
                             WHERE email=%s""", (email,))
         user = cursor.fetchall()
@@ -396,6 +394,7 @@ class database:
         # conn.close()
         return current_date
     
+
 
 
 

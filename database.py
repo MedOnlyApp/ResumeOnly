@@ -86,7 +86,6 @@ class database:
         user = cursor.fetchall()
         conn.close()
 
-        print("login :", user)
         if len(user) == 0:
             return "user not found"
         elif user[0]["password"] != password:
@@ -108,7 +107,6 @@ class database:
         user = cursor.fetchall()
         conn.close()
 
-        print("username :", user)
         if len(user) == 0:
             return "valid"
         else:
@@ -126,9 +124,6 @@ class database:
         user = cursor.fetchall()
         conn.close()
         
-        # print(user)
-        # print(len(user))
-        print("Registration :", user)
         if len(user) == 0:
             return "valid"
         elif len(user) == 1:
@@ -151,7 +146,6 @@ class database:
         user = cursor.fetchall()
         conn.close()
 
-        print("registration code :", user)
         if user[0]["verification_code"] == verification_code:
             db_time_str = str(user[0]["date"])
             # > Convert string to datetime object
@@ -205,17 +199,6 @@ class database:
         conn, cursor = db.initialize_database()
 
         date = db.get_date()
-        print("*******************",(client_id, 
-                        applications_id,
-                        date,
-                        job_title,
-                        resume_name,
-                        # resume_file,
-                        resume_text,
-                        job_desctiption,
-                        score,
-                        resume_info
-                        ))
 
         cursor.execute("""INSERT INTO Applications(
                         client_id,
@@ -414,21 +397,6 @@ class database:
         return current_date
     
 
-if __name__ == "__main__":
-    db = database()
-    db.create_tables()
-    database.add_user(str(uuid.uuid4()), "Mohamed Rouane", "MedOnly", "m@gmail.com", "123", "", None, "132565")
-    # database.check_registration_info("mohamed.rouane.23@ump.ac.ma", "password")
-    db.read_users()
-    # database.update_user_password("mohamed.rouane.23@ump.ac.ma", "new")
-    # db.read_users()
-    # print(database.get_client_profile_info("11fdab8c-c490-4b11-b309-038d1856551e"))
-    # db.read_applicants()
-    # db.get_date()
-    # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
-    # database.remove_application("9b1db1b1-13c8-47ad-87c0-21f062fd71f7", "1749329612743")
-    # print(database.get_client_applications("9b1db1b1-13c8-47ad-87c0-21f062fd71f7"))
-    # db.read_applicants()
 
 
 

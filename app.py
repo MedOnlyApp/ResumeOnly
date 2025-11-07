@@ -1,39 +1,32 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from database import database
 import uuid
-import random
-import smtplib
 import os
 import backend
 import base64
 import time
-import json
 import json5
 import secrets
 
-# code = f"{secrets.randbelow(1_000_000):06d}"
-# print(code)
 
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-app.secret_key = "moh"
+app.secret_key = "MedOnly"
 
 @app.route('/')
 def index():
     """Render the main page"""
     session["user_id"] = None
-    # return render_template('index.html')
     return render_template('main_page.html')
 
 @app.route("/portfolio/<username>")
 def portfolio_site(username):
-    # Here you can query a database or dictionary to fetch user portfolio data
-    # Example: return a portfolio page with the given username
+    """Here you can query a database or dictionary to fetch user portfolio data"""
+    # > Example: return a portfolio page with the given username
     portfolio = database.get_portfolio(username)["portfolio"]
-    print(portfolio)
     return render_template("portfolio_site.html", username=username, portfolio=portfolio)
 
 @app.route('/login')
@@ -53,7 +46,6 @@ def login_form():
     data = request.json
     email = data.get("email", '')
     password = data.get("password", '')
-    # print(f"email : {email} | password : {password}")
 
     response = database.check_login_info(email=email, password=password)
     
@@ -80,7 +72,6 @@ def register_form():
     email = data.get("email", '')
     password = data.get("password", '')
     password_confirm = data.get("password_confirm", '')
-    print(f"email : {email} | password : {password}")
 
     verification_code = f"{secrets.randbelow(1_000_000):06d}"
     
@@ -129,14 +120,12 @@ def Verification():
 def main_page():
     """Render the main page"""
     user_id=session.get('user_id')
-    # print("user_ID  = ",user_id)
     return render_template('main_page.html', user_id=user_id)
 
 @app.route('/analyse_resume')
 def analyse_resume():
     """Render the resume page"""
     user_id=session.get('user_id')
-    # print(user_id)
     if user_id is None:
         return redirect(url_for('login'))
     
@@ -151,7 +140,6 @@ def analyse_applicants():
 @app.route('/upload_resume', methods=["POST"])
 def upload_resume(): 
     """Analyse resume"""
-    print(request.files)
     if 'resumes' not in request.files:
         return 'No files part in the request'
     
@@ -160,17 +148,14 @@ def upload_resume():
     if file and file.filename != '':
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file_binary = file.read()
-        # file.save(filepath)
     
     data = request.form
     job_title = data.get("job_title", '')
     job_description = data.get("job_description", '')
-    # print(f"job_title : {job_title} | job_description : {job_description}")
 
     obj = backend.ExtractData(file_binary, job_description, job_title)
     resume_data = obj.get_resume_data()
     job_data = obj.get_job_data()
-    print(resume_data)
     application_id = int(time.time() * 1000)
     session["application_id"] = application_id
     database.add_application(client_id=session["user_id"],
@@ -186,7 +171,6 @@ def upload_resume():
     
     if resume_data["image"]["image"] != None:
         if isinstance(resume_data["image"]["image"], bytes):
-            # image_bytes = bytes(resume_data["image"]["image"])
             resume_data["image"]["image"] = base64.b64encode(image_bytes).decode('utf-8')
 
     return jsonify({
@@ -197,7 +181,6 @@ def upload_resume():
 @app.route('/upload_applicants', methods=["POST"])
 def upload_applicants(): 
     """Analyse applicants"""
-    print(request.files)
     if 'resumes[]' not in request.files:
         return 'No files part in the request'
     
@@ -206,12 +189,10 @@ def upload_applicants():
     for file in files:
         if file and file.filename != '':
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-            # file.save(filepath)
     
     data = request.form
     job_title = data.get("job_title", '')
     job_description = data.get("job_description", '')
-    # print(f"job_title : {job_title} | job_description : {job_description}")
 
     return jsonify({
         'response': 'Files uploaded successfully!'
@@ -221,19 +202,13 @@ def upload_applicants():
 def portfolio():
     """Render the portfolio page"""
     user_id=session.get('user_id')
-    print("user_ID  = ",user_id)
 
     return render_template("portfolio.html", user_id=user_id, application_id=session.get("application_id"))
 
 @app.route('/get_portfolio_info', methods=["POST"])
 def get_portfolio_info():
     """Get the resume info for the portfolio page"""
-    # data = request.json
-    # email = data.get("email", '')
-
-    # resume_data = database.get_application(session.get("user_id"), session.get("application_id"))
     resume_data = json5.loads(database.get_application(session.get("user_id"), session.get("application_id"))["resume_info"])
-    print(resume_data)
     return jsonify({
         "resume_data": resume_data
     })
@@ -267,7 +242,6 @@ def check_portfolio_name():
 def account():
     """Render the account page"""
     user_id=session.get('user_id')
-    print("user_ID  = ",user_id)
 
     return render_template("profile.html", user_id=user_id)
 
@@ -275,13 +249,9 @@ def account():
 def load_account_info():
     """Get Account information"""
     user_id=session.get('user_id')
-    print("user_ID  = ",user_id)
     applications = database.get_client_applications(client_id=user_id)
-    # profile_info = list(database.get_client_profile_info(client_id=user_id))
     profile_info = database.get_client_profile_info(client_id=user_id)
-    print("profile_info :", profile_info)
     if profile_info["image"] != None:
-        # if isinstance(profile_info["image"], bytes):
         image_bytes = bytes(profile_info["image"])
         profile_info["image"] = base64.b64encode(image_bytes).decode('utf-8')
 
@@ -295,12 +265,9 @@ def delete_application():
     """Delete application"""
     data = request.json
     application_id = data.get("application_id", "")
-    print("application_Id : ", application_id)
     user_id=session.get('user_id')
-    print("user_ID  = ",user_id)
 
     database.remove_application(client_id=user_id, application_id=application_id)
-    print("deleted")
 
     return jsonify({
         "Isdeleted": True
@@ -310,12 +277,10 @@ def delete_application():
 def add_img():
     """Add image to account"""
     user_id = session.get('user_id')
-    print("user_ID  = ", user_id)
     file = request.files["image"]
-    print("file : ", file)
 
     if file and file.filename != "":
-        file_binary = file.read()  # ✅ Read the binary content
+        file_binary = file.read()  # > Read the binary content
         database.add_image_to_user(client_id=user_id, image=file_binary)
 
     return jsonify({
@@ -326,31 +291,16 @@ def add_img():
 def update_profile():
     """Update profile info"""
     user_id = session.get('user_id')
-    print("user_ID  = ", user_id)
 
     data = request.json
     client_name = data.get("client_name", "")
     bio = data.get("bio", "")
-    # print("file : ", file)
 
     database.update_profile(client_id=user_id, client_name=client_name, bio=bio)
 
     return jsonify({
         'response': 'Profile Updated successfully!'
     })
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
-
-# (1, '88ebe9b0-9f1b-4dbd-9c54-859cb04f9ac5', 'MedOnly', 'mohamed.rouane.23@ump.ac.ma', 'new')
-
 
 
 

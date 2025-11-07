@@ -43,7 +43,6 @@ verification_Form.addEventListener('submit', function(e) {
     })
     .then(data => {
         
-        console.log(data.response)
         if ( data.response == 'valid' )
         {
             window.location.href = "/login"
@@ -89,12 +88,9 @@ verification_Form.addEventListener('submit', function(e) {
     
     })
     .catch(error => {
-        console.error('Error:', error);
-        // loadingElement.remove();
         
-        // // Add error message
-        // addMessage('system', 'Sorry, there was an error processing your question. Please try again.');
     });
 });
+
 
 

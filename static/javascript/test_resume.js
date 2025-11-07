@@ -72,7 +72,6 @@ submit_form.addEventListener('submit', function(e) {
         // > Remove the loader        
         loader.remove()
 
-        console.log('Removed the loader')
       
         // resume_steps_div_id.style.display = "none"
         resume_info_div.style.display = "block"
@@ -83,13 +82,11 @@ submit_form.addEventListener('submit', function(e) {
         // > add the score
         if ( data.resume_data["description"] == false )
         {
-            console.log("score = ", 0)
             score_paragraph_div.children[1].children[0].style.width = "0%"
             score_paragraph_div.children[0].children[1].innerHTML = "0/100"
         }
         else if ( data.resume_data["score"] != null )
         {
-            console.log("score = ", data.resume_data["score"])
             score_paragraph_div.children[1].children[0].style.width = parseInt(String(data.resume_data["score"])) + "%"
             score_paragraph_div.children[0].children[1].innerHTML = parseInt(String(data.resume_data["score"])) + "/100"
         }
@@ -155,7 +152,6 @@ submit_form.addEventListener('submit', function(e) {
     
     })
     .catch(error => {
-        console.error('Error:', error.message);
         const body = document.querySelector("body")
         body.insertAdjacentHTML("beforeend", `<div class="error-panel">
                                             <span>
@@ -184,17 +180,14 @@ submit_form.addEventListener('submit', function(e) {
 upload_resume_div.addEventListener("dragover", (e) => {
     e.preventDefault()
     upload_resume_div.classList.add("dragover")
-    console.log("moh")
 })
 
 upload_resume_div.addEventListener("dragleave", (e) => {
     e.preventDefault()
     upload_resume_div.classList.remove("dragover")
-    console.log("zak")
 })
 
 upload_resume_div.addEventListener('drop', (e) => {
-    console.log("wal")
     e.preventDefault()
     upload_resume_div.classList.remove('dragover')
 
@@ -216,7 +209,6 @@ upload_resume_div.addEventListener('drop', (e) => {
 '
         const span = document.querySelector('.pdf_file .name span')
         span.textContent = file.name
-        console.log("File ready to upload:", file)
     }
 
     const remove_button = document.getElementById("remove_button_id")
@@ -226,17 +218,12 @@ upload_resume_div.addEventListener('drop', (e) => {
         remove_button.addEventListener("click", (e) => {
             fileInput.files = null
             uploaded_resumes_container.innerHTML = ""
-            console.log("close")
         })
     }
 });
 
 fileInput.addEventListener("input", (e) => {
-    // console.log("wal")
-    // e.preventDefault()
-    // upload_resume_div.classList.remove('dragover')
 
-    // const file = e.dataTransfer.files[0]
     if (fileInput.files && fileInput.files[0].type === "application/pdf") {
         // fileInput.files = e.dataTransfer.files // Set dropped file to hidden input
         uploaded_resumes_container.innerHTML += '\
@@ -254,7 +241,6 @@ fileInput.addEventListener("input", (e) => {
 '
         const span = document.querySelector('.pdf_file .name span')
         span.textContent = fileInput.files[0].name
-        console.log("File ready to upload:", fileInput.files[0])
     }
 
     const remove_button = document.getElementById("remove_button_id")
@@ -264,7 +250,6 @@ fileInput.addEventListener("input", (e) => {
         remove_button.addEventListener("click", (e) => {
             fileInput.files = null
             uploaded_resumes_container.innerHTML = ""
-            console.log("close")
         })
     }
 
@@ -277,11 +262,10 @@ fileInput.addEventListener("input", (e) => {
 window.addEventListener("pageshow", function (event) {
   // 'pageshow' fires even when the page is loaded from cache
   if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
-    document.querySelector("form")?.reset();
-    console.log("reseted1")
+    document.querySelector("form")?.reset()
 } else {
-    document.querySelector("form")?.reset();
-    console.log("reseted2")
+    document.querySelector("form")?.reset()
   }
 
 });
+
